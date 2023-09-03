@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.kaajjo.libresudoku"
+    namespace = "com.roy93group.libresudoku"
     compileSdk = 34
 
     defaultConfig {
@@ -23,7 +23,8 @@ android {
         }
 
         ksp {
-            arg("room.schemaLocation", "${projectDir}/schemas")
+//            arg("room.schemaLocation", "${projectDir}/schemas")
+            arg("room.schemaLocation", "$projectDir/schemas")
         }
     }
 
