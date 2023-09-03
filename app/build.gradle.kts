@@ -12,11 +12,11 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.kaajjo.libresudoku"
+        applicationId = "com.roy93group.libresudoku"
         minSdk = 26
         targetSdk = 34
-        versionCode = 7
-        versionName = "1.5.0"
+        versionCode = 20230903
+        versionName = "2023.09.03"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -30,7 +30,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -55,7 +58,6 @@ android {
 }
 
 aboutLibraries {
-    // Remove the "generated" timestamp to allow for reproducible builds
     excludeFields = arrayOf("generated")
 }
 
@@ -72,25 +74,18 @@ dependencies {
     implementation(libs.material.icons.extended)
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
-
     implementation(libs.navigation.compose)
-
     implementation(libs.accompanist.systemuicontroller)
     implementation(libs.accompanist.pager.indicators)
-
     implementation(libs.hilt)
     implementation(libs.hilt.navigation)
     kapt(libs.hilt.compiler)
-
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
-
     implementation(libs.datastore.preferences)
-
     implementation(libs.appcompat)
     implementation(libs.acra.dialog)
     implementation(libs.acra.mail)
-
     implementation(libs.aboutLibraries)
 }
