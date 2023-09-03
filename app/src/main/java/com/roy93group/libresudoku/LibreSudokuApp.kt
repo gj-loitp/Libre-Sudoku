@@ -2,6 +2,7 @@ package com.roy93group.libresudoku
 
 import android.app.Application
 import android.content.Context
+import android.widget.Toast
 import com.roy93group.libresudoku.di.ACRA_SHARED_PREFS_NAME
 import dagger.hilt.android.HiltAndroidApp
 import org.acra.config.dialog
@@ -15,7 +16,9 @@ class LibreSudokuApp : Application() {
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
 
-        if (!BuildConfig.DEBUG) {
+        if (BuildConfig.DEBUG) {
+            //do nothing
+        } else {
             // Only user can send a crash report
             initAcra {
                 buildConfigClass = BuildConfig::class.java
@@ -30,13 +33,21 @@ class LibreSudokuApp : Application() {
                 }
 
                 mailSender {
-                    mailTo = "crashreport.libresudoku@gmail.com"
+                    mailTo = "roy93group@gmail.com"
                     reportFileName = "Report_${LocalDate.now()}_v${BuildConfig.VERSION_NAME}.txt"
                     subject = "LibreSudoku crash report"
                     reportAsFile = true
                 }
                 sharedPreferencesName = ACRA_SHARED_PREFS_NAME
             }
+        }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+        if (BuildConfig.DEBUG) {
+            Toast.makeText(this, "$packageName onCreate", Toast.LENGTH_SHORT).show()
         }
     }
 }

@@ -6,11 +6,9 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -82,10 +80,12 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var settings: AppSettingsManager
 
-    @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        WindowCompat.setDecorFitsSystemWindows(
+            /* window = */ window,
+            /* decorFitsSystemWindows = */ false
+        )
 
         setContent {
             val mainViewModel: MainActivityViewModel = hiltViewModel()
@@ -117,7 +117,9 @@ class MainActivity : AppCompatActivity() {
                 val navController = rememberNavController()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
 
-                var bottomBarState by rememberSaveable { mutableStateOf(false) }
+                var bottomBarState by rememberSaveable {
+                    mutableStateOf(false)
+                }
 
                 LaunchedEffect(navBackStackEntry) {
                     bottomBarState = when (navBackStackEntry?.destination?.route) {
@@ -389,7 +391,13 @@ class MainActivity : AppCompatActivity() {
                                 if (activity != null) {
                                     val intentData = activity.intent.data
                                     if (intentData != null) {
-                                        navController.navigate("import_sudoku_file?${Uri.encode(intentData.toString())}?-1")
+                                        navController.navigate(
+                                            "import_sudoku_file?${
+                                                Uri.encode(
+                                                    intentData.toString()
+                                                )
+                                            }?-1"
+                                        )
                                     }
                                     LaunchedEffect(intentData) {
                                         if (activity.intent.data == null) {
@@ -416,13 +424,15 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun NavigationBar(
     navController: NavController,
-    bottomBarState: Boolean
+    bottomBarState: Boolean,
 ) {
-    var selectedScreen by remember { mutableStateOf(Route.HOME) }
+    var selectedScreen by remember {
+        mutableStateOf(Route.HOME)
+    }
     val navBarScreens = listOf(
-        Pair(Route.STATISTICS, R.string.nav_bar_statistics),
-        Pair(Route.HOME, R.string.nav_bar_home),
-        Pair(Route.MORE, R.string.nav_bar_more),
+        Pair(first = Route.STATISTICS, second = R.string.nav_bar_statistics),
+        Pair(first = Route.HOME, second = R.string.nav_bar_home),
+        Pair(first = Route.MORE, second = R.string.nav_bar_more),
     )
     val navBarIcons = listOf(
         painterResource(R.drawable.ic_round_info_24),
@@ -430,7 +440,7 @@ fun NavigationBar(
         painterResource(R.drawable.ic_round_more_horiz_24)
     )
     AnimatedContent(
-        targetState = bottomBarState
+        targetState = bottomBarState, label = ""
     ) { visible ->
         if (visible) {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -473,7 +483,7 @@ fun NavigationBar(
 class MainActivityViewModel
 @Inject constructor(
     themeSettingsManager: ThemeSettingsManager,
-    appSettingsManager: AppSettingsManager
+    appSettingsManager: AppSettingsManager,
 ) : ViewModel() {
     val dc = themeSettingsManager.dynamicColors
     val darkTheme = themeSettingsManager.darkTheme
