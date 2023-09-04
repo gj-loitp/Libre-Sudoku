@@ -25,8 +25,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.roy93group.libresudoku.R
 import com.roy93group.libresudoku.ui.components.ScrollbarLazyColumn
-import com.roy93group.libresudoku.ui.util.isScrolledToEnd
-import com.roy93group.libresudoku.ui.util.isScrolledToStart
+import com.roy93group.libresudoku.ui.utils.isScrolledToEnd
+import com.roy93group.libresudoku.ui.utils.isScrolledToStart
 
 @Composable
 fun SelectionDialog(
@@ -34,7 +34,7 @@ fun SelectionDialog(
     selections: List<String>,
     selected: Int = 0,
     onSelect: (Int) -> Unit,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
 ) {
     AlertDialog(
         title = {
@@ -88,7 +88,7 @@ fun SelectionDialog(
     entries: Map<String, String>,
     selected: String,
     onSelect: (String) -> Unit,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
 ) {
     AlertDialog(
         title = {
@@ -103,8 +103,10 @@ fun SelectionDialog(
             Box {
                 val lazyListState = rememberLazyListState()
 
-                if (!lazyListState.isScrolledToStart()) Divider(Modifier.align(Alignment.TopCenter))
-                if (!lazyListState.isScrolledToEnd()) Divider(Modifier.align(Alignment.BottomCenter))
+                if (!lazyListState.isScrolledToStart())
+                    Divider(Modifier.align(Alignment.TopCenter))
+                if (!lazyListState.isScrolledToEnd())
+                    Divider(Modifier.align(Alignment.BottomCenter))
 
                 ScrollbarLazyColumn(state = lazyListState) {
                     items(entries.toList()) { item ->
@@ -148,7 +150,7 @@ fun DateFormatDialog(
     customDateFormatText: String,
     selected: String,
     onSelect: (String) -> Unit,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
 ) {
     AlertDialog(
         title = {
@@ -230,7 +232,7 @@ fun SetDateFormatPatternDialog(
     onTextValueChange: (String) -> Unit,
     customDateFormat: String,
     invalidCustomDateFormat: Boolean,
-    datePreview: String = ""
+    datePreview: String = "",
 ) {
     AlertDialog(
         title = {

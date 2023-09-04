@@ -52,7 +52,7 @@ import com.roy93group.libresudoku.ui.components.board.Board
 import com.roy93group.libresudoku.ui.game.components.DefaultGameKeyboard
 import com.roy93group.libresudoku.ui.game.components.ToolBarItem
 import com.roy93group.libresudoku.ui.game.components.ToolbarItem
-import com.roy93group.libresudoku.ui.util.ReverseArrangement
+import com.roy93group.libresudoku.ui.utils.ReverseArrangement
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

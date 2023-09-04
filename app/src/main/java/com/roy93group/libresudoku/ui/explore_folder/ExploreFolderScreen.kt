@@ -100,9 +100,9 @@ import com.roy93group.libresudoku.data.database.model.SudokuBoard
 import com.roy93group.libresudoku.ui.components.EmptyScreen
 import com.roy93group.libresudoku.ui.components.ScrollbarLazyColumn
 import com.roy93group.libresudoku.ui.components.board.BoardPreview
-import com.roy93group.libresudoku.ui.util.isScrolledToEnd
-import com.roy93group.libresudoku.ui.util.isScrolledToStart
-import com.roy93group.libresudoku.ui.util.isScrollingUp
+import com.roy93group.libresudoku.ui.utils.isScrolledToEnd
+import com.roy93group.libresudoku.ui.utils.isScrolledToStart
+import com.roy93group.libresudoku.ui.utils.isScrollingUp
 import kotlinx.coroutines.launch
 import kotlin.math.sqrt
 import kotlin.time.toKotlinDuration

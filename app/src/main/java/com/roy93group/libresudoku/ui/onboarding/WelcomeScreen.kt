@@ -36,7 +36,7 @@ import javax.inject.Inject
 @Composable
 fun WelcomeScreen(
     navigateToGame: () -> Unit,
-    viewModel: WelcomeViewModel
+    viewModel: WelcomeViewModel,
 ) {
     Column(
         modifier = Modifier
@@ -74,7 +74,7 @@ fun FirstPage(
     selectedCellChanged: (Cell) -> Unit,
     selectedCell: Cell,
     board: List<List<Cell>>,
-    onFinishedClick: () -> Unit
+    onFinishedClick: () -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -110,9 +110,9 @@ fun FirstPage(
 @HiltViewModel
 class WelcomeViewModel
 @Inject constructor(
-    private val settingsDataManager: AppSettingsManager
+    private val settingsDataManager: AppSettingsManager,
 ) : ViewModel() {
-    var selectedCell by mutableStateOf(Cell(-1, -1, 0))
+    var selectedCell by mutableStateOf(Cell(row = -1, col = -1, value = 0))
 
     val previewBoard = listOf(
         listOf(

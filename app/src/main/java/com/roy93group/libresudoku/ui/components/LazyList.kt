@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.roy93group.libresudoku.ui.util.drawVerticalScrollbar
+import com.roy93group.libresudoku.ui.utils.drawVerticalScrollbar
 
 @Composable
 fun ScrollbarLazyColumn(

@@ -36,11 +36,10 @@ import com.roy93group.libresudoku.ui.components.collapsing_topappbar.CollapsingT
 import com.roy93group.libresudoku.ui.components.collapsing_topappbar.CollapsingTopAppBar
 import com.roy93group.libresudoku.ui.components.collapsing_topappbar.rememberTopAppBarScrollBehavior
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsBoardTheme(
     viewModel: SettingsBoardThemeViewModel,
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 ) {
     val scrollBehavior = rememberTopAppBarScrollBehavior()
     Scaffold(
@@ -113,19 +112,19 @@ private fun BoardPreviewTheme(
     positionLines: Boolean,
     errosHighlight: Boolean,
     crossHighlight: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val previewBoard = listOf(
         listOf(
-            Cell(0, 0, 0, locked = true),
-            Cell(0, 1, 0, locked = true),
-            Cell(0, 2, 1, locked = true),
-            Cell(0, 3, 0, locked = true),
-            Cell(0, 4, 0, locked = true),
-            Cell(0, 5, 0, locked = true),
-            Cell(0, 6, 9, locked = true),
-            Cell(0, 7, 0, locked = true),
-            Cell(0, 8, 0, locked = true)
+            Cell(row = 0, col = 0, value = 0, locked = true),
+            Cell(row = 0, col = 1, value = 0, locked = true),
+            Cell(row = 0, col = 2, value = 1, locked = true),
+            Cell(row = 0, col = 3, value = 0, locked = true),
+            Cell(row = 0, col = 4, value = 0, locked = true),
+            Cell(row = 0, col = 5, value = 0, locked = true),
+            Cell(row = 0, col = 6, value = 9, locked = true),
+            Cell(row = 0, col = 7, value = 0, locked = true),
+            Cell(row = 0, col = 8, value = 0, locked = true)
         ),
         listOf(
             Cell(1, 0, 0, locked = true),
@@ -144,7 +143,7 @@ private fun BoardPreviewTheme(
             Cell(2, 2, 0, locked = true),
             Cell(2, 3, 0, locked = true),
             Cell(2, 4, 2, locked = true),
-            Cell(2, 5, 4, locked = true),
+            Cell(row = 2, col = 5, value = 4, locked = true),
             Cell(2, 6, 0, locked = true),
             Cell(2, 7, 0, locked = true),
             Cell(2, 8, 3, locked = true)
@@ -216,7 +215,9 @@ private fun BoardPreviewTheme(
             Cell(8, 8, 0, locked = true)
         ),
     )
-    var selectedCell by remember { mutableStateOf(Cell(-1, -1, 0)) }
+    var selectedCell by remember {
+        mutableStateOf(Cell(-1, -1, 0))
+    }
     Board(
         modifier = modifier,
         board = previewBoard,

@@ -32,7 +32,7 @@ import com.roy93group.libresudoku.ui.theme.BoardColors
 import com.roy93group.libresudoku.ui.theme.LibreSudokuTheme
 import com.roy93group.libresudoku.ui.theme.SudokuBoardColors
 import com.roy93group.libresudoku.ui.theme.SudokuBoardColorsImpl
-import com.roy93group.libresudoku.ui.util.LightDarkPreview
+import com.roy93group.libresudoku.ui.utils.LightDarkPreview
 import kotlin.math.ceil
 import kotlin.math.floor
 import kotlin.math.sqrt

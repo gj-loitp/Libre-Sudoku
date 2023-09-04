@@ -25,7 +25,7 @@ class StatisticsViewModel
     private val recordRepository: RecordRepository,
     private val tipCardsDataStore: TipCardsDataStore,
     savedGameRepository: SavedGameRepository,
-    appSettingsManager: AppSettingsManager
+    appSettingsManager: AppSettingsManager,
 ) : ViewModel() {
     var showDeleteDialog by mutableStateOf(false)
     var selectedDifficulty by mutableStateOf(GameDifficulty.Unspecified)

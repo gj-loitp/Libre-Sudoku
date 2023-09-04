@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.util
+package com.roy93group.libresudoku.ui.utils
 
 import android.app.Activity
 import android.content.Context

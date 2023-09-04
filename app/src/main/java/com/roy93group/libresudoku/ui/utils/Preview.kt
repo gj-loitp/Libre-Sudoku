@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.util
+package com.roy93group.libresudoku.ui.utils
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.ui.tooling.preview.Preview

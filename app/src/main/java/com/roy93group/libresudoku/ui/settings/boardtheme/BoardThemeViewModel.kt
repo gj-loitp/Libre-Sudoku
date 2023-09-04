@@ -8,11 +8,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class SettingsBoardThemeViewModel @Inject constructor(
     private val themeSettingsManager: ThemeSettingsManager,
-    private val appSettingsManager: AppSettingsManager
+    private val appSettingsManager: AppSettingsManager,
 ) : ViewModel() {
     val monetSudokuBoard = themeSettingsManager.monetSudokuBoard
     val positionLines = appSettingsManager.positionLines

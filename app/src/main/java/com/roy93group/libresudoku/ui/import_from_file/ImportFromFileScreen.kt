@@ -71,8 +71,8 @@ import com.roy93group.libresudoku.R
 import com.roy93group.libresudoku.core.qqwing.GameDifficulty
 import com.roy93group.libresudoku.ui.components.ScrollbarLazyVerticalGrid
 import com.roy93group.libresudoku.ui.components.board.BoardPreview
-import com.roy93group.libresudoku.ui.util.isScrolledToStart
-import com.roy93group.libresudoku.ui.util.isScrollingUp
+import com.roy93group.libresudoku.ui.utils.isScrolledToStart
+import com.roy93group.libresudoku.ui.utils.isScrollingUp
 import kotlinx.coroutines.launch
 import java.io.InputStreamReader
 

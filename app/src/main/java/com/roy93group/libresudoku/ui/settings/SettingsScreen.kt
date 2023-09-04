@@ -15,7 +15,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -65,12 +64,11 @@ import java.time.format.DateTimeFormatterBuilder
 import java.time.format.FormatStyle
 import java.util.Locale
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     navigateBack: () -> Unit,
     viewModel: SettingsViewModel,
-    navigateBoardSettings: () -> Unit
+    navigateBoardSettings: () -> Unit,
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -540,11 +538,15 @@ fun SettingsScreen(
                     }
                 },
                 dismissButton = {
-                    FilledTonalButton(onClick = { viewModel.resetStatsDialog = false }) {
+                    FilledTonalButton(onClick = {
+                        viewModel.resetStatsDialog = false
+                    }) {
                         Text(stringResource(R.string.action_cancel))
                     }
                 },
-                onDismissRequest = { viewModel.resetStatsDialog = false }
+                onDismissRequest = {
+                    viewModel.resetStatsDialog = false
+                }
             )
         } else if (viewModel.languagePickDialog) {
             SelectionDialog(
@@ -565,16 +567,16 @@ fun SettingsScreen(
         } else if (viewModel.dateFormatDialog) {
             DateFormatDialog(
                 title = stringResource(R.string.pref_date_format),
-                entries = DateFormats.associateWith { dateFormatEntry ->
+                entries = dateFormats.associateWith { dateFormatEntry ->
                     val dateString = ZonedDateTime.now().format(
                         when (dateFormatEntry) {
                             "" -> {
                                 DateTimeFormatter.ofPattern(
                                     DateTimeFormatterBuilder.getLocalizedDateTimePattern(
-                                        FormatStyle.SHORT,
-                                        null,
-                                        IsoChronology.INSTANCE,
-                                        Locale.getDefault()
+                                        /* dateStyle = */ FormatStyle.SHORT,
+                                        /* timeStyle = */ null,
+                                        /* chrono = */ IsoChronology.INSTANCE,
+                                        /* locale = */ Locale.getDefault()
                                     )
                                 )
                             }
@@ -587,7 +589,7 @@ fun SettingsScreen(
                     "${dateFormatEntry.ifEmpty { stringResource(R.string.label_default) }} ($dateString)"
                 },
                 customDateFormatText =
-                if (!DateFormats.contains(dateFormat))
+                if (!dateFormats.contains(dateFormat))
                     "$dateFormat (${
                         ZonedDateTime.now().format(DateTimeFormatter.ofPattern(dateFormat))
                     })"
@@ -609,7 +611,7 @@ fun SettingsScreen(
         if (viewModel.customFormatDialog) {
             var customDateFormat by rememberSaveable {
                 mutableStateOf(
-                    if (DateFormats.contains(
+                    if (dateFormats.contains(
                             dateFormat
                         )
                     ) "" else dateFormat
@@ -648,7 +650,7 @@ fun SettingsScreen(
     }
 }
 
-private val DateFormats = listOf(
+private val dateFormats = listOf(
     "",
     "dd/MM/yy",
     "dd.MM.yy",
@@ -661,7 +663,7 @@ private val DateFormats = listOf(
 @Composable
 fun SettingsCategory(
     modifier: Modifier = Modifier,
-    title: String
+    title: String,
 ) {
     Row(
         modifier = modifier

@@ -22,16 +22,15 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.roy93group.libresudoku.ui.theme.LibreSudokuTheme
-import com.roy93group.libresudoku.ui.util.LightDarkPreview
+import com.roy93group.libresudoku.ui.utils.LightDarkPreview
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AppThemePreviewItem(
     modifier: Modifier = Modifier,
     selected: Boolean,
     colorScheme: ColorScheme,
     shapes: Shapes,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -130,8 +129,7 @@ fun AppThemePreviewItem(
 
         // Bottom bar
         Box(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.BottomCenter,
         ) {
             Surface(

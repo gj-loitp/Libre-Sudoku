@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.util
+package com.roy93group.libresudoku.ui.utils
 
 import android.view.ViewConfiguration
 import androidx.compose.animation.core.Animatable

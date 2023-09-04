@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.roy93group.libresudoku.core.qqwing.GameType
 import com.roy93group.libresudoku.ui.theme.LibreSudokuTheme
-import com.roy93group.libresudoku.ui.util.LightDarkPreview
+import com.roy93group.libresudoku.ui.utils.LightDarkPreview
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

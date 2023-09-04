@@ -67,8 +67,8 @@ import com.roy93group.libresudoku.ui.theme.AppTheme
 import com.roy93group.libresudoku.ui.theme.BoardColors
 import com.roy93group.libresudoku.ui.theme.LibreSudokuTheme
 import com.roy93group.libresudoku.ui.theme.SudokuBoardColorsImpl
-import com.roy93group.libresudoku.ui.util.Route
-import com.roy93group.libresudoku.ui.util.findActivity
+import com.roy93group.libresudoku.ui.utils.Route
+import com.roy93group.libresudoku.ui.utils.findActivity
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

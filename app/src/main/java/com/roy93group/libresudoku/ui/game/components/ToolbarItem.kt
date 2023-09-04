@@ -21,7 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.roy93group.libresudoku.R
 import com.roy93group.libresudoku.ui.theme.LibreSudokuTheme
-import com.roy93group.libresudoku.ui.util.LightDarkPreview
+import com.roy93group.libresudoku.ui.utils.LightDarkPreview
 
 enum class ToolBarItem {
     Undo,

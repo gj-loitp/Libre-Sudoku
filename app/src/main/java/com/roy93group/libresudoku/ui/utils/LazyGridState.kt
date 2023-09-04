@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.util
+package com.roy93group.libresudoku.ui.utils
 
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.runtime.Composable

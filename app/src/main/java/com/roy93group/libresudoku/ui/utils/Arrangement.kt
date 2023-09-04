@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.util
+package com.roy93group.libresudoku.ui.utils
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.runtime.Stable

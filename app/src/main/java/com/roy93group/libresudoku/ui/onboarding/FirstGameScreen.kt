@@ -39,7 +39,7 @@ import com.roy93group.libresudoku.ui.theme.LibreSudokuTheme
 @Composable
 fun FirstGameDialog(
     onFinished: () -> Unit,
-    onDismiss: () -> Unit = { }
+    onDismiss: () -> Unit = { },
 ) {
     Dialog(onDismissRequest = onDismiss) {
         Surface(

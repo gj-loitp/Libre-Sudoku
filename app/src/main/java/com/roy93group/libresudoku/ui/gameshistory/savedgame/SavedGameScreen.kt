@@ -69,7 +69,7 @@ import com.roy93group.libresudoku.core.utils.toFormattedString
 import com.roy93group.libresudoku.data.datastore.AppSettingsManager
 import com.roy93group.libresudoku.ui.components.EmptyScreen
 import com.roy93group.libresudoku.ui.components.board.Board
-import com.roy93group.libresudoku.ui.util.pagerTabIndicatorOffsetM3
+import com.roy93group.libresudoku.ui.utils.pagerTabIndicatorOffsetM3
 import kotlinx.coroutines.launch
 import java.time.format.DateTimeFormatter
 import kotlin.time.toKotlinDuration

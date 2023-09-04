@@ -71,7 +71,7 @@ import kotlin.math.roundToInt
 fun StatisticsScreen(
     navigateHistory: () -> Unit,
     navigateSavedGame: (Long) -> Unit,
-    viewModel: StatisticsViewModel
+    viewModel: StatisticsViewModel,
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(rememberTopAppBarState())
     val dateFormat by viewModel.dateFormat.collectAsStateWithLifecycle(initialValue = "")
@@ -289,7 +289,7 @@ fun ShowDeleteDialog(
     modifier: Modifier = Modifier,
     onDismissRequest: () -> Unit,
     onConfirm: () -> Unit,
-    index: Int
+    index: Int,
 ) {
     AlertDialog(
         modifier = modifier,
@@ -321,7 +321,7 @@ fun ShowDeleteDialog(
 @Composable
 fun OverallStatistics(
     modifier: Modifier = Modifier,
-    statsRow: List<List<String>>
+    statsRow: List<List<String>>,
 ) {
     StatisticsSection(
         modifier = modifier,
@@ -336,7 +336,7 @@ fun StatisticsSection(
     modifier: Modifier = Modifier,
     title: String,
     painter: Painter,
-    statRows: List<List<String>>
+    statRows: List<List<String>>,
 ) {
     Column(
         modifier = modifier
@@ -378,7 +378,7 @@ fun StatisticsSection(
 fun StatsSectionName(
     modifier: Modifier = Modifier,
     title: String,
-    painter: Painter
+    painter: Painter,
 ) {
     Row(
         modifier = modifier
@@ -403,7 +403,7 @@ fun StatsSectionName(
 fun StatRow(
     startText: String,
     endText: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -426,7 +426,7 @@ fun ChipRowType(
     modifier: Modifier = Modifier,
     types: List<Pair<GameType, String>>,
     selected: GameType,
-    onSelected: (GameType) -> Unit
+    onSelected: (GameType) -> Unit,
 ) {
     LazyRow(
         modifier = modifier,
@@ -434,7 +434,8 @@ fun ChipRowType(
     ) {
         items(types) { type ->
             val selectedColor by animateColorAsState(
-                targetValue = if (type.first == selected) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface
+                targetValue = if (type.first == selected) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface,
+                label = ""
             )
             ElevatedFilterChip(
                 modifier = Modifier.padding(horizontal = 2.dp),
@@ -458,7 +459,7 @@ fun ChipRowDifficulty(
     items: List<GameDifficulty>,
     selected: GameDifficulty,
     onSelected: (GameDifficulty) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     LazyRow(
         modifier = modifier,
@@ -467,7 +468,8 @@ fun ChipRowDifficulty(
     ) {
         items(items) { item ->
             val selectedColor by animateColorAsState(
-                targetValue = if (selected == item) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface
+                targetValue = if (selected == item) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface,
+                label = ""
             )
             ElevatedFilterChip(
                 selected = selected == item,
@@ -502,7 +504,7 @@ fun RecordItem(
     type: String,
     dateFormat: String,
     onClick: () -> Unit = { },
-    onLongClick: () -> Unit = { }
+    onLongClick: () -> Unit = { },
 ) {
     Box(
         modifier = modifier

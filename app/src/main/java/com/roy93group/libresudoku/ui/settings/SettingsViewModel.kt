@@ -25,14 +25,13 @@ class SettingsViewModel
     private val tipCardsDataStore: TipCardsDataStore,
     private val appDatabase: AppDatabase,
     private val acraSharedPrefs: AcraSharedPrefs,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     @Inject
     lateinit var appThemeDataStore: ThemeSettingsManager
 
     val launchedFromGame by mutableStateOf(savedStateHandle.get<Boolean>("fromGame"))
     var resetStatsDialog by mutableStateOf(false)
-
     var darkModeDialog by mutableStateOf(false)
     var fontSizeDialog by mutableStateOf(false)
     var inputMethodDialog by mutableStateOf(false)
@@ -40,7 +39,6 @@ class SettingsViewModel
     var languagePickDialog by mutableStateOf(false)
     var dateFormatDialog by mutableStateOf(false)
     var customFormatDialog by mutableStateOf(false)
-
     var crashReportingEnabled by mutableStateOf(acraSharedPrefs.getAcraEnabled())
 
     val darkTheme by lazy {
