@@ -50,13 +50,12 @@ fun Modifier.pagerTabIndicatorOffsetM3(
         )
         layout(constraints.maxWidth, maxOf(placeable.height, constraints.minHeight)) {
             placeable.placeRelative(
-                indicatorOffset,
-                maxOf(constraints.minHeight - placeable.height, 0)
+                x = indicatorOffset,
+                y = maxOf(constraints.minHeight - placeable.height, 0)
             )
         }
     }
 }
-
 
 // https://stackoverflow.com/questions/69901608/how-to-disable-simultaneous-clicks-on-multiple-items-in-jetpack-compose-list-c
 fun Modifier.disableSplitMotionEvents() =

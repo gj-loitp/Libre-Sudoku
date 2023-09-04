@@ -10,21 +10,21 @@ object BoardColors {
     inline val foregroundColor: Color
         @Composable
         get() = MaterialTheme.colorScheme.onSurface.blend(
-            MaterialTheme.colorScheme.primary,
+            color = MaterialTheme.colorScheme.primary,
             fraction = 0.65f
         )
 
     inline val notesColor: Color
         @Composable
         get() = MaterialTheme.colorScheme.onSurfaceVariant.blend(
-            MaterialTheme.colorScheme.secondary,
-            0.4f
+            color = MaterialTheme.colorScheme.secondary,
+            fraction = 0.4f
         )
     inline val altForegroundColor: Color
         @Composable
         get() = MaterialTheme.colorScheme.onSurfaceVariant.blend(
-            MaterialTheme.colorScheme.secondary,
-            0.5f
+            color = MaterialTheme.colorScheme.secondary,
+            fraction = 0.5f
         ).copy(alpha = 0.85f)
 
     inline val errorColor: Color

@@ -9,7 +9,11 @@ import androidx.compose.ui.unit.Density
  */
 @Stable
 val ReverseArrangement = object : Arrangement.Vertical {
-    override fun Density.arrange(totalSize: Int, sizes: IntArray, outPositions: IntArray) {
+    override fun Density.arrange(
+        totalSize: Int,
+        sizes: IntArray,
+        outPositions: IntArray,
+    ) {
         val consumedSize = sizes.fold(0) { a, b -> a + b }
         var current = totalSize - consumedSize
         for (i in (sizes.size - 1) downTo 0) {
