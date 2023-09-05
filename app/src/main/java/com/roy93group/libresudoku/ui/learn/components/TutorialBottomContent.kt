@@ -14,13 +14,12 @@ import androidx.compose.ui.unit.dp
 import com.roy93group.libresudoku.R
 
 @Composable
-@OptIn(ExperimentalAnimationApi::class)
 fun TutorialBottomContent(
     steps: List<String>,
     step: Int,
     onPreviousClick: () -> Unit,
     onNextClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier
@@ -29,7 +28,7 @@ fun TutorialBottomContent(
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        AnimatedContent(targetState = steps[step]) { stepText ->
+        AnimatedContent(targetState = steps[step], label = "") { stepText ->
             Column {
                 Text(stepText)
             }

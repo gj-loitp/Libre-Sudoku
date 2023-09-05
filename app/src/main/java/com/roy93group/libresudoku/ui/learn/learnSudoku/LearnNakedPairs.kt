@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.learn.learnsudoku
+package com.roy93group.libresudoku.ui.learn.learnSudoku
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -25,7 +25,7 @@ import com.roy93group.libresudoku.ui.learn.components.TutorialBottomContent
 
 @Composable
 fun LearnNakedPairs(
-    helpNavController: NavController
+    helpNavController: NavController,
 ) {
     TutorialBase(
         title = stringResource(R.string.naked_pairs_title),
@@ -44,14 +44,14 @@ fun LearnNakedPairs(
         var notes by remember {
             mutableStateOf(
                 listOf(
-                    Note(3, 3, 1),
+                    Note(row = 3, col = 3, value = 1),
                     Note(3, 3, 2),
                     Note(3, 3, 4),
                     Note(3, 3, 5),
                     Note(3, 4, 1),
                     Note(3, 4, 2),
                     Note(3, 4, 4),
-                    Note(3, 4, 5),
+                    Note(row = 3, col = 4, value = 5),
                     Note(3, 4, 7),
                     Note(3, 5, 2),
                     Note(3, 5, 4),
@@ -72,9 +72,11 @@ fun LearnNakedPairs(
             stringResource(R.string.naked_pairs_end),
         )
         val stepsCell = listOf(
-            listOf(Cell(4, 4), Cell(4, 5))
+            listOf(Cell(row = 4, col = 4), Cell(row = 4, col = 5))
         )
-        var step by remember { mutableIntStateOf(0) }
+        var step by remember {
+            mutableIntStateOf(0)
+        }
         LaunchedEffect(key1 = step) {
             when (step) {
                 0 -> {
@@ -94,13 +96,14 @@ fun LearnNakedPairs(
                         Note(3, 5, 7),
                         Note(4, 4, 2),
                         Note(4, 4, 3),
-                        Note(4, 5, 2),
+                        Note(row = 4, col = 5, value = 2),
                         Note(4, 5, 3),
                         Note(5, 5, 2),
                         Note(5, 5, 3),
                         Note(5, 5, 5)
                     )
                 }
+
                 1 -> {
                     notes = listOf(
                         Note(3, 3, 1),
@@ -116,7 +119,7 @@ fun LearnNakedPairs(
                         Note(4, 4, 2),
                         Note(4, 4, 3),
                         Note(4, 5, 2),
-                        Note(4, 5, 3),
+                        Note(row = 4, col = 5, value = 3),
                         Note(5, 5, 5)
                     )
                 }
@@ -129,18 +132,24 @@ fun LearnNakedPairs(
             Board(
                 board = board,
                 notes = notes,
-                cellsToHighlight = if (step < stepsCell.size) stepsCell[step] else null,
+                cellsToHighlight = if (step < stepsCell.size)
+                    stepsCell[step]
+                else
+                    null,
                 onClick = { },
-                selectedCell = Cell(-1, -1),
+                selectedCell = Cell(row = -1, col = -1),
                 boardColors = LocalBoardColors.current
             )
             TutorialBottomContent(
                 steps = steps,
                 step = step,
-                onPreviousClick = { if (step > 0) step-- },
-                onNextClick = { if (step < (steps.size - 1)) step++ }
+                onPreviousClick = {
+                    if (step > 0) step--
+                },
+                onNextClick = {
+                    if (step < (steps.size - 1)) step++
+                }
             )
         }
     }
 }
-

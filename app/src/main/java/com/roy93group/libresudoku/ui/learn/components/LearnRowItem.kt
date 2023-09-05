@@ -22,7 +22,7 @@ fun LearnRowItem(
     modifier: Modifier = Modifier,
     subtitle: String? = null,
     onLongClick: () -> Unit = { },
-    painter: Painter = painterResource(R.drawable.ic_outline_help_outline_24)
+    painter: Painter = painterResource(R.drawable.ic_outline_help_outline_24),
 ) {
     val height = if (subtitle != null) 72.dp else 56.dp
     val titleStyle = MaterialTheme.typography.bodyLarge

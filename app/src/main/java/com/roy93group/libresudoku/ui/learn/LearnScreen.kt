@@ -20,23 +20,28 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import com.roy93group.libresudoku.R
-import com.roy93group.libresudoku.ui.learn.learnapp.LearnAppScreen
-import com.roy93group.libresudoku.ui.learn.learnapp.ToolbarTutorialScreen
-import com.roy93group.libresudoku.ui.learn.learnsudoku.*
+import com.roy93group.libresudoku.ui.learn.learnApp.LearnAppScreen
+import com.roy93group.libresudoku.ui.learn.learnApp.ToolbarTutorialScreen
+import com.roy93group.libresudoku.ui.learn.learnSudoku.*
 import kotlinx.coroutines.launch
 
 @Composable
 fun LearnScreen(
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 ) {
     val helpNavController = rememberNavController()
     NavHost(navController = helpNavController, startDestination = "help") {
-        composable("help") { LearnScreenContent(navigateBack, helpNavController) }
-        composable("app_toolbar") { ToolbarTutorialScreen(helpNavController) }
-        composable("sudoku_rules") { LearnSudokuRules(helpNavController) }
-        composable("sudoku_basic") { LearnBasic(helpNavController) }
-        composable("sudoku_naked_pairs") { LearnNakedPairs(helpNavController) }
-        composable("sudoku_hidden_pairs") { LearnHiddenPairs(helpNavController) }
+        composable("help") {
+            LearnScreenContent(
+                navigateBack = navigateBack,
+                helpNavController = helpNavController
+            )
+        }
+        composable("app_toolbar") { ToolbarTutorialScreen(helpNavController = helpNavController) }
+        composable("sudoku_rules") { LearnSudokuRules(helpNavController = helpNavController) }
+        composable("sudoku_basic") { LearnBasic(helpNavController = helpNavController) }
+        composable("sudoku_naked_pairs") { LearnNakedPairs(helpNavController = helpNavController) }
+        composable("sudoku_hidden_pairs") { LearnHiddenPairs(helpNavController = helpNavController) }
     }
 }
 
@@ -44,7 +49,7 @@ fun LearnScreen(
 @OptIn(ExperimentalPagerApi::class, ExperimentalMaterial3Api::class)
 fun LearnScreenContent(
     navigateBack: () -> Unit,
-    helpNavController: NavController
+    helpNavController: NavController,
 ) {
     Scaffold(
         topBar = {
@@ -82,7 +87,7 @@ fun LearnScreenContent(
                         selected = pagerState.currentPage == index,
                         onClick = {
                             coroutineScope.launch {
-                                pagerState.animateScrollToPage(index, 0f)
+                                pagerState.animateScrollToPage(page = index, pageOffset = 0f)
                             }
                         },
                         text = {

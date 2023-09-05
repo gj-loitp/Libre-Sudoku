@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.learn.learnapp
+package com.roy93group.libresudoku.ui.learn.learnApp
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,7 +12,7 @@ import com.roy93group.libresudoku.ui.learn.components.LearnRowItem
 
 @Composable
 fun LearnAppScreen(
-    helpNavController: NavController
+    helpNavController: NavController,
 ) {
     Column(
         modifier = Modifier.fillMaxWidth()

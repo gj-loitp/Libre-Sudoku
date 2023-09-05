@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.learn.learnsudoku
+package com.roy93group.libresudoku.ui.learn.learnSudoku
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -19,7 +19,7 @@ import com.roy93group.libresudoku.ui.learn.components.TutorialBase
 
 @Composable
 fun LearnSudokuRules(
-    helpNavController: NavController
+    helpNavController: NavController,
 ) {
     TutorialBase(
         title = stringResource(R.string.learn_sudoku_rules),
@@ -32,8 +32,12 @@ fun LearnSudokuRules(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            var selectedCell by remember { mutableStateOf(Cell(-1, -1, 0)) }
-            var secondSelectedCell by remember { mutableStateOf(Cell(-1, -1, 0)) }
+            var selectedCell by remember {
+                mutableStateOf(Cell(row = -1, col = -1, value = 0))
+            }
+            var secondSelectedCell by remember {
+                mutableStateOf(Cell(row = -1, col = -1, value = 0))
+            }
 
             val previewBoard by remember {
                 mutableStateOf(
@@ -50,7 +54,7 @@ fun LearnSudokuRules(
                             Cell(0, 8, 0)
                         ),
                         listOf(
-                            Cell(1, 0, 8),
+                            Cell(row = 1, col = 0, value = 8),
                             Cell(1, 1, 2),
                             Cell(1, 2, 4),
                             Cell(1, 3, 7),
@@ -65,7 +69,7 @@ fun LearnSudokuRules(
                             Cell(2, 1, 0),
                             Cell(2, 2, 0),
                             Cell(2, 3, 2),
-                            Cell(2, 4, 0),
+                            Cell(row = 2, col = 4, value = 0),
                             Cell(2, 5, 0),
                             Cell(2, 6, 0),
                             Cell(2, 7, 0),
@@ -84,7 +88,7 @@ fun LearnSudokuRules(
                         ),
                         listOf(
                             Cell(4, 0, 0),
-                            Cell(4, 1, 0),
+                            Cell(row = 4, col = 1, value = 0),
                             Cell(4, 2, 0),
                             Cell(4, 3, 1),
                             Cell(4, 4, 0),
@@ -117,7 +121,7 @@ fun LearnSudokuRules(
                         ),
                         listOf(
                             Cell(7, 0, 0),
-                            Cell(7, 1, 0),
+                            Cell(row = 7, col = 1, value = 0),
                             Cell(7, 2, 0),
                             Cell(7, 3, 9),
                             Cell(7, 4, 0),
@@ -153,7 +157,9 @@ fun LearnSudokuRules(
             Spacer(modifier = Modifier.height(8.dp))
             Text(stringResource(R.string.sudoku_rules_mistakes))
 
-            var highlightError by remember { mutableStateOf(false) }
+            var highlightError by remember {
+                mutableStateOf(false)
+            }
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {

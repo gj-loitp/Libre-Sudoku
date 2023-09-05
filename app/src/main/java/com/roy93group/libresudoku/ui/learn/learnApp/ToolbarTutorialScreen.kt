@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.learn.learnapp
+package com.roy93group.libresudoku.ui.learn.learnApp
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text

@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.learn.learnsudoku
+package com.roy93group.libresudoku.ui.learn.learnSudoku
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -25,7 +25,7 @@ import com.roy93group.libresudoku.ui.learn.components.TutorialBottomContent
 
 @Composable
 fun LearnHiddenPairs(
-    helpNavController: NavController
+    helpNavController: NavController,
 ) {
     TutorialBase(
         title = stringResource(R.string.learn_hidden_pairs_title),
@@ -35,8 +35,8 @@ fun LearnHiddenPairs(
         val board by remember {
             mutableStateOf(
                 sudokuParser.parseBoard(
-                    "..............................3.1.......2........................................",
-                    GameType.Default9x9,
+                    board = "..............................3.1.......2........................................",
+                    gameType = GameType.Default9x9,
                     emptySeparator = '.'
                 ).toList()
             )
@@ -51,7 +51,7 @@ fun LearnHiddenPairs(
                     Note(4, 3, 5),
                     Note(4, 3, 7),
                     Note(4, 5, 4),
-                    Note(4, 5, 5),
+                    Note(row = 4, col = 5, value = 5),
                     Note(5, 3, 6),
                     Note(5, 3, 7),
                     Note(5, 3, 8),
@@ -69,14 +69,14 @@ fun LearnHiddenPairs(
             stringResource(R.string.learn_hidden_pairs_2)
         )
         val stepsCell = listOf(
-            listOf(Cell(5, 3), Cell(5, 5))
+            listOf(Cell(row = 5, col = 3), Cell(row = 5, col = 5))
         )
         var step by remember { mutableIntStateOf(0) }
         LaunchedEffect(key1 = step) {
             when (step) {
                 0 -> {
                     notes = listOf(
-                        Note(3, 4, 4),
+                        Note(row = 3, col = 4, value = 4),
                         Note(3, 4, 5),
                         Note(3, 4, 8),
                         Note(4, 3, 4),
@@ -95,6 +95,7 @@ fun LearnHiddenPairs(
                         Note(5, 5, 9)
                     )
                 }
+
                 1 -> {
                     notes = listOf(
                         Note(3, 4, 4),
@@ -130,8 +131,12 @@ fun LearnHiddenPairs(
             TutorialBottomContent(
                 steps = steps,
                 step = step,
-                onPreviousClick = { if (step > 0) step-- },
-                onNextClick = { if (step < (steps.size - 1)) step++ }
+                onPreviousClick = {
+                    if (step > 0) step--
+                },
+                onNextClick = {
+                    if (step < (steps.size - 1)) step++
+                }
             )
         }
     }
