@@ -1,7 +1,6 @@
 package com.roy93group.libresudoku.ui.home
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
@@ -45,9 +44,11 @@ import kotlinx.coroutines.runBlocking
 @Composable
 fun HomeScreen(
     navigatePlayGame: (Pair<Long, Boolean>) -> Unit,
-    viewModel: HomeViewModel
+    viewModel: HomeViewModel,
 ) {
-    var continueGameDialog by rememberSaveable { mutableStateOf(false) }
+    var continueGameDialog by rememberSaveable {
+        mutableStateOf(false)
+    }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -63,7 +64,7 @@ fun HomeScreen(
             runBlocking {
                 //viewModel.saveToDatabase()
                 val saved = lastGame?.completed ?: false
-                navigatePlayGame(Pair(viewModel.insertedBoardUid, saved))
+                navigatePlayGame(Pair(first = viewModel.insertedBoardUid, second = saved))
             }
         }
 
@@ -148,8 +149,8 @@ fun HomeScreen(
     }
 
     LaunchedEffect(
-        viewModel.lastSelectedGameDifficultyType,
-        viewModel.saveSelectedGameDifficultyType
+        key1 = viewModel.lastSelectedGameDifficultyType,
+        key2 = viewModel.saveSelectedGameDifficultyType
     ) {
         viewModel.restoreDifficultyAndType()
     }
@@ -158,7 +159,7 @@ fun HomeScreen(
 @Composable
 fun GeneratingDialog(
     onDismiss: () -> Unit,
-    text: String
+    text: String,
 ) {
     Dialog(onDismissRequest = onDismiss) {
         Surface(
@@ -189,13 +190,12 @@ fun GeneratingDialog(
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HorizontalPicker(
     modifier: Modifier = Modifier,
     text: String,
     onLeftClick: () -> Unit,
-    onRightClick: () -> Unit
+    onRightClick: () -> Unit,
 ) {
     Row(
         modifier = modifier
@@ -212,7 +212,9 @@ fun HorizontalPicker(
         }
         AnimatedContent(
             targetState = text,
-            transitionSpec = { fadeIn() togetherWith fadeOut() }
+            transitionSpec = {
+                fadeIn() togetherWith fadeOut()
+            }, label = ""
         ) { text ->
             Text(text)
         }

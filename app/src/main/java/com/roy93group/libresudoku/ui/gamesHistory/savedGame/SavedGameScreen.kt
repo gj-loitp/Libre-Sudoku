@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.gameshistory.savedgame
+package com.roy93group.libresudoku.ui.gamesHistory.savedGame
 
 import android.os.Build.VERSION.SDK_INT
 import android.widget.Toast
@@ -80,7 +80,7 @@ fun SavedGameScreen(
     navigateBack: () -> Unit,
     navigatePlayGame: (Long) -> Unit,
     navigateToFolder: (Long) -> Unit,
-    viewModel: SavedGameViewModel
+    viewModel: SavedGameViewModel,
 ) {
     val dateFormat by viewModel.dateFormat.collectAsStateWithLifecycle(
         initialValue = ""
@@ -93,7 +93,9 @@ fun SavedGameScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.game_id, viewModel.boardUid ?: -1)) },
+                title = {
+                    Text(stringResource(R.string.game_id, viewModel.boardUid ?: -1))
+                },
                 navigationIcon = {
                     IconButton(onClick = navigateBack) {
                         Icon(
@@ -103,7 +105,9 @@ fun SavedGameScreen(
                     }
                 },
                 actions = {
-                    var showMenu by remember { mutableStateOf(false) }
+                    var showMenu by remember {
+                        mutableStateOf(false)
+                    }
                     Box {
                         IconButton(onClick = { showMenu = !showMenu }) {
                             Icon(
@@ -191,7 +195,9 @@ fun SavedGameScreen(
                         )
                     }
                 }
-                val boardScale = remember { Animatable(0.3f) }
+                val boardScale = remember {
+                    Animatable(0.3f)
+                }
                 LaunchedEffect(Unit) {
                     boardScale.animateTo(
                         targetValue = 1f,
@@ -217,7 +223,7 @@ fun SavedGameScreen(
                                 notes = viewModel.notes,
                                 modifier = boardModifier,
                                 mainTextSize = fontSizeValue,
-                                selectedCell = Cell(-1, -1),
+                                selectedCell = Cell(row = -1, col = -1),
                                 onClick = { },
                                 boardColors = LocalBoardColors.current,
                                 crossHighlight = crossHighlight
@@ -227,7 +233,7 @@ fun SavedGameScreen(
                                 board = viewModel.parsedInitialBoard,
                                 modifier = boardModifier,
                                 mainTextSize = fontSizeValue,
-                                selectedCell = Cell(-1, -1),
+                                selectedCell = Cell(row = -1, col = -1),
                                 onClick = { },
                                 boardColors = LocalBoardColors.current,
                                 crossHighlight = crossHighlight
@@ -235,7 +241,6 @@ fun SavedGameScreen(
                         }
                     }
                 }
-
 
                 Column(
                     modifier = Modifier
@@ -251,15 +256,21 @@ fun SavedGameScreen(
                                     contentDescription = null
                                 )
                             },
-                            onClick = { navigateToFolder(it.uid) },
-                            label = { Text(it.name) }
+                            onClick = {
+                                navigateToFolder(it.uid)
+                            },
+                            label = {
+                                Text(it.name)
+                            }
                         )
                     }
 
                     val textStyle = MaterialTheme.typography.bodyLarge
 
                     val progressPercentage by viewModel.gameProgressPercentage.collectAsStateWithLifecycle()
-                    LaunchedEffect(viewModel.parsedCurrentBoard) { viewModel.countProgressFilled() }
+                    LaunchedEffect(viewModel.parsedCurrentBoard) {
+                        viewModel.countProgressFilled()
+                    }
 
                     Text(
                         text = stringResource(
@@ -292,7 +303,10 @@ fun SavedGameScreen(
                     Text(
                         text = viewModel.savedGame?.let {
                             when {
-                                it.mistakes >= PreferencesConstants.MISTAKES_LIMIT -> stringResource(R.string.saved_game_mistakes_limit)
+                                it.mistakes >= PreferencesConstants.MISTAKES_LIMIT -> stringResource(
+                                    R.string.saved_game_mistakes_limit
+                                )
+
                                 it.giveUp -> stringResource(R.string.saved_game_give_up)
                                 it.completed && !it.canContinue -> stringResource(R.string.saved_game_completed)
                                 else -> stringResource(R.string.saved_game_in_progress)
@@ -326,7 +340,9 @@ fun SavedGameScreen(
                     if (viewModel.savedGame!!.canContinue) {
                         FilledTonalButton(
                             modifier = Modifier.align(Alignment.CenterHorizontally),
-                            onClick = { navigatePlayGame(viewModel.savedGame!!.uid) }
+                            onClick = {
+                                navigatePlayGame(viewModel.savedGame!!.uid)
+                            }
                         ) {
                             Text(stringResource(R.string.action_continue))
                         }
@@ -357,9 +373,9 @@ fun SavedGameScreen(
                         // Android 13 and higher have its own notification when copying
                         if (SDK_INT < 33) {
                             Toast.makeText(
-                                context,
-                                R.string.export_string_state_copied,
-                                Toast.LENGTH_SHORT
+                                /* context = */ context,
+                                /* resId = */ R.string.export_string_state_copied,
+                                /* duration = */ Toast.LENGTH_SHORT
                             ).show()
                         }
                     }
@@ -373,7 +389,7 @@ fun SavedGameScreen(
 private fun ExportDialog(
     onDismiss: () -> Unit,
     boardString: String,
-    onClickCopy: () -> Unit
+    onClickCopy: () -> Unit,
 ) {
     AlertDialog(
         title = { Text(stringResource(R.string.export_string_title)) },
@@ -402,7 +418,7 @@ private fun ExportDialog(
                     },
                     contentPadding = ButtonDefaults.ButtonWithIconContentPadding
                 ) {
-                    Icon(Icons.Rounded.ContentCopy, contentDescription = null)
+                    Icon(imageVector = Icons.Rounded.ContentCopy, contentDescription = null)
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(stringResource(R.string.export_string_copy))
                 }

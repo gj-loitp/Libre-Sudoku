@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.gameshistory
+package com.roy93group.libresudoku.ui.gamesHistory
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class HistoryViewModel
 @Inject constructor(
     savedGameRepository: SavedGameRepository,
-    appSettingsManager: AppSettingsManager
+    appSettingsManager: AppSettingsManager,
 ) : ViewModel(
 ) {
     val games = savedGameRepository.getWithBoards()

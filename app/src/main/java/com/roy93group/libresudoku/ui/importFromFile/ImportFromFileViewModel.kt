@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.import_from_file
+package com.roy93group.libresudoku.ui.importFromFile
 
 import android.net.Uri
 import androidx.compose.runtime.getValue
@@ -33,7 +33,7 @@ import javax.inject.Inject
 class ImportFromFileViewModel @Inject constructor(
     private val insertFolderUseCase: InsertFolderUseCase,
     private val boardRepository: BoardRepository,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
     val fileUri: Uri? by mutableStateOf(savedStateHandle.get<String>("uri")?.toUri())
@@ -41,7 +41,6 @@ class ImportFromFileViewModel @Inject constructor(
     // uid of the folder where to add the imported sudoku.
     // If uid = -1, a new folder will be created (ask the user for the folder name)
     val folderUid by mutableLongStateOf(savedStateHandle.get<Long>("folder_uid") ?: -1L)
-
     var isLoading by mutableStateOf(true)
     var isSaved by mutableStateOf(false)
     var isSaving by mutableStateOf(false)

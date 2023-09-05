@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.import_from_file
+package com.roy93group.libresudoku.ui.importFromFile
 
 import android.widget.Toast
 import androidx.activity.compose.BackHandler
@@ -76,11 +76,11 @@ import com.roy93group.libresudoku.ui.utils.isScrollingUp
 import kotlinx.coroutines.launch
 import java.io.InputStreamReader
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ImportFromFileScreen(
     viewModel: ImportFromFileViewModel,
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
 ) {
     BackHandler {
         navigateBack()
@@ -131,7 +131,9 @@ fun ImportFromFileScreen(
             ) {
                 FloatingActionButton(
                     onClick = {
-                        coroutineScope.launch { lazyGridState.animateScrollToItem(0) }
+                        coroutineScope.launch {
+                            lazyGridState.animateScrollToItem(0)
+                        }
                     }
                 ) {
                     Icon(Icons.Rounded.KeyboardArrowUp, contentDescription = null)
@@ -158,9 +160,17 @@ fun ImportFromFileScreen(
                 ) {
                     Box {
                         var gameTypeMenuExpanded by remember { mutableStateOf(false) }
-                        val dropDownIconRotation by animateFloatAsState(if (gameTypeMenuExpanded) 180f else 0f)
-                        TextButton(onClick = { gameTypeMenuExpanded = !gameTypeMenuExpanded }) {
-                            AnimatedContent(stringResource(viewModel.difficultyForImport.resName)) { text ->
+                        val dropDownIconRotation by animateFloatAsState(
+                            if (gameTypeMenuExpanded) 180f else 0f,
+                            label = ""
+                        )
+                        TextButton(onClick = {
+                            gameTypeMenuExpanded = !gameTypeMenuExpanded
+                        }) {
+                            AnimatedContent(
+                                stringResource(viewModel.difficultyForImport.resName),
+                                label = ""
+                            ) { text ->
                                 Text(text)
                             }
                             Icon(
@@ -198,7 +208,11 @@ fun ImportFromFileScreen(
                 content = {
                     items(
                         items = gamesToImport,
-                        span = { GridItemSpan(1).also { span = maxLineSpan } }
+                        span = {
+                            GridItemSpan(1).also {
+                                span = maxLineSpan
+                            }
+                        }
                     ) { item ->
                         Column(
                             modifier = Modifier.padding(8.dp)
@@ -251,10 +265,14 @@ fun ImportFromFileScreen(
                     singleLine = true,
                     value = value,
                     onValueChange = { value = it },
-                    label = { Text(stringResource(R.string.create_folder_name)) }
+                    label = {
+                        Text(stringResource(R.string.create_folder_name))
+                    }
                 )
             },
-            onDismissRequest = { setFolderNameDialog = false },
+            onDismissRequest = {
+                setFolderNameDialog = false
+            },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -318,9 +336,9 @@ fun ImportFromFileScreen(
     LaunchedEffect(importError) {
         if (importError) {
             Toast.makeText(
-                context,
-                context.getString(R.string.import_from_file_fail),
-                Toast.LENGTH_SHORT
+                /* context = */ context,
+                /* text = */ context.getString(R.string.import_from_file_fail),
+                /* duration = */ Toast.LENGTH_SHORT
             ).show()
             navigateBack()
         }
@@ -331,7 +349,7 @@ fun ImportFromFileScreen(
 private fun ImportDifficultyMenu(
     expanded: Boolean,
     onDismissRequest: () -> Unit,
-    onClick: (GameDifficulty) -> Unit
+    onClick: (GameDifficulty) -> Unit,
 ) {
     MaterialTheme(shapes = MaterialTheme.shapes.copy(extraSmall = MaterialTheme.shapes.large)) {
         DropdownMenu(

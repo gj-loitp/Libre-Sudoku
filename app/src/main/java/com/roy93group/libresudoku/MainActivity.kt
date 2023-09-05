@@ -51,10 +51,10 @@ import com.roy93group.libresudoku.ui.create_edit_sudoku.CreateSudokuScreen
 import com.roy93group.libresudoku.ui.explore_folder.ExploreFolderScreen
 import com.roy93group.libresudoku.ui.folders.FoldersScreen
 import com.roy93group.libresudoku.ui.game.GameScreen
-import com.roy93group.libresudoku.ui.gameshistory.GamesHistoryScreen
-import com.roy93group.libresudoku.ui.gameshistory.savedgame.SavedGameScreen
+import com.roy93group.libresudoku.ui.gamesHistory.GamesHistoryScreen
+import com.roy93group.libresudoku.ui.gamesHistory.savedGame.SavedGameScreen
 import com.roy93group.libresudoku.ui.home.HomeScreen
-import com.roy93group.libresudoku.ui.import_from_file.ImportFromFileScreen
+import com.roy93group.libresudoku.ui.importFromFile.ImportFromFileScreen
 import com.roy93group.libresudoku.ui.learn.LearnScreen
 import com.roy93group.libresudoku.ui.more.MoreScreen
 import com.roy93group.libresudoku.ui.more.about.AboutLibrariesScreen

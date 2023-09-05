@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.gameshistory
+package com.roy93group.libresudoku.ui.gamesHistory
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -73,11 +73,13 @@ import kotlin.time.toKotlinDuration
 fun GamesHistoryScreen(
     navigateBack: () -> Unit,
     navigateSavedGame: (Long) -> Unit,
-    viewModel: HistoryViewModel
+    viewModel: HistoryViewModel,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-    var filterBottomSheet by rememberSaveable { mutableStateOf(false) }
+    var filterBottomSheet by rememberSaveable {
+        mutableStateOf(false)
+    }
 
     Scaffold(
         modifier = Modifier
@@ -281,7 +283,7 @@ fun SudokuHistoryItem(
     savedGame: SavedGame,
     modifier: Modifier = Modifier,
     onClick: () -> Unit = { },
-    dateTimeFormatter: DateTimeFormatter
+    dateTimeFormatter: DateTimeFormatter,
 ) {
     Box(
         modifier = modifier

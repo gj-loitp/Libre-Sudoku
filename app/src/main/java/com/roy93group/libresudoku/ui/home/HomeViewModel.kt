@@ -28,11 +28,11 @@ class HomeViewModel
 @Inject constructor(
     private val appSettingsManager: AppSettingsManager,
     private val boardRepository: BoardRepository,
-    private val savedGameRepository: SavedGameRepository
+    private val savedGameRepository: SavedGameRepository,
 ) : ViewModel() {
 
     val lastSavedGame = savedGameRepository.getLast()
-        .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+        .stateIn(scope = viewModelScope, started = SharingStarted.Eagerly, initialValue = null)
 
     var insertedBoardUid = -1L
 
@@ -51,21 +51,20 @@ class HomeViewModel
 
     val lastSelectedGameDifficultyType = appSettingsManager.lastSelectedGameDifficultyType
         .stateIn(
-            viewModelScope,
-            SharingStarted.Eagerly,
+            scope = viewModelScope,
+            started = SharingStarted.Eagerly,
             initialValue = Pair(difficulties.first(), types.first())
         )
 
     val saveSelectedGameDifficultyType = appSettingsManager.saveSelectedGameDifficultyType
         .stateIn(
-            viewModelScope,
-            SharingStarted.Eagerly,
+            scope = viewModelScope,
+            started = SharingStarted.Eagerly,
             initialValue = PreferencesConstants.DEFAULT_SAVE_LAST_SELECTED_DIFF_TYPE
         )
 
     var selectedDifficulty by mutableStateOf(difficulties.first())
     var selectedType by mutableStateOf(types.first())
-
     var isGenerating by mutableStateOf(false)
     var isSolving by mutableStateOf(false)
     var readyToPlay by mutableStateOf(false)
@@ -74,7 +73,6 @@ class HomeViewModel
         List(selectedType.size) { row -> List(selectedType.size) { col -> Cell(row, col, 0) } }
     private var solvedPuzzle =
         List(selectedType.size) { row -> List(selectedType.size) { col -> Cell(row, col, 0) } }
-
 
     fun startGame() {
         isSolving = false
@@ -99,11 +97,17 @@ class HomeViewModel
 
             // generating
             isGenerating = true
-            val generated = qqWingController.generate(gameTypeToGenerate, gameDifficultyToGenerate)
+            val generated = qqWingController.generate(
+                type = gameTypeToGenerate,
+                difficulty = gameDifficultyToGenerate
+            )
             isGenerating = false
 
             isSolving = true
-            val solved = qqWingController.solve(generated, gameTypeToGenerate)
+            val solved = qqWingController.solve(
+                gameBoard = generated,
+                gameType = gameTypeToGenerate
+            )
             isSolving = false
 
             if (!qqWingController.isImpossible && qqWingController.solutionCount == 1) {

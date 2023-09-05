@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.gameshistory.savedgame
+package com.roy93group.libresudoku.ui.gamesHistory.savedGame
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,7 +38,7 @@ class SavedGameViewModel
     private val getFolderUseCase: GetFolderUseCase,
     appSettingsManager: AppSettingsManager,
     themeSettingsManager: ThemeSettingsManager,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     val boardUid = savedStateHandle.get<Long>("uid")
 
@@ -73,12 +73,15 @@ class SavedGameViewModel
                         val sudokuParser = SudokuParser()
                         parsedInitialBoard =
                             sudokuParser.parseBoard(
-                                boardEntity.initialBoard,
-                                boardEntity.type,
+                                board = boardEntity.initialBoard,
+                                gameType = boardEntity.type,
                                 locked = true
                             )
                         parsedCurrentBoard =
-                            sudokuParser.parseBoard(savedGame.currentBoard, boardEntity.type)
+                            sudokuParser.parseBoard(
+                                board = savedGame.currentBoard,
+                                gameType = boardEntity.type
+                            )
                                 .onEach { cells ->
                                     cells.forEach { cell ->
                                         cell.locked =
@@ -120,7 +123,7 @@ class SavedGameViewModel
     fun getFontSize(factor: Int): TextUnit {
         boardEntity?.let {
             val sudokuUtils = SudokuUtils()
-            return sudokuUtils.getFontSize(it.type, factor)
+            return sudokuUtils.getFontSize(type = it.type, factor = factor)
         }
         return 24.sp
     }
