@@ -108,7 +108,7 @@ import kotlin.math.sqrt
 import kotlin.time.toKotlinDuration
 
 @OptIn(
-    ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class,
+    ExperimentalMaterial3Api::class,
     ExperimentalFoundationApi::class
 )
 @Composable
@@ -118,7 +118,7 @@ fun ExploreFolderScreen(
     navigatePlayGame: (Triple<Long, Boolean, Long>) -> Unit,
     navigateImportFromFile: (Pair<String, Long>) -> Unit,
     navigateEditGame: (Pair<Long, Long>) -> Unit,
-    navigateCreateSudoku: (Long) -> Unit
+    navigateCreateSudoku: (Long) -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val lazyListState = rememberLazyListState()
@@ -155,7 +155,7 @@ fun ExploreFolderScreen(
 
     Scaffold(
         topBar = {
-            AnimatedContent(viewModel.inSelectionMode) { inSelectionMode ->
+            AnimatedContent(viewModel.inSelectionMode, label = "") { inSelectionMode ->
                 if (inSelectionMode) {
                     SelectionTopAppbar(
                         title = { Text(viewModel.selectedBoardsList.size.toString()) },
@@ -190,7 +190,9 @@ fun ExploreFolderScreen(
             ) {
                 FloatingActionButton(
                     onClick = {
-                        coroutineScope.launch { lazyListState.animateScrollToItem(0) }
+                        coroutineScope.launch {
+                            lazyListState.animateScrollToItem(0)
+                        }
                     }
                 ) {
                     Icon(Icons.Rounded.KeyboardArrowUp, contentDescription = null)
@@ -237,9 +239,16 @@ fun ExploreFolderScreen(
                                 viewModel.inSelectionMode = true
                                 viewModel.addToSelection(game.first)
                             },
-                            onPlayClick = { viewModel.prepareSudokuToPlay(game.first) },
+                            onPlayClick = {
+                                viewModel.prepareSudokuToPlay(game.first)
+                            },
                             onEditClick = {
-                                navigateEditGame(Pair(game.first.uid, folder!!.uid))
+                                navigateEditGame(
+                                    Pair(
+                                        first = game.first.uid,
+                                        second = folder!!.uid
+                                    )
+                                )
                             },
                             onDeleteClick = {
                                 deleteBoardDialogBoard = game.first
@@ -268,7 +277,13 @@ fun ExploreFolderScreen(
     LaunchedEffect(viewModel.readyToPlay, viewModel.gameUidToPlay) {
         if (viewModel.readyToPlay) {
             viewModel.gameUidToPlay?.let {
-                navigatePlayGame(Triple(it, viewModel.isPlayedBefore, folder!!.uid))
+                navigatePlayGame(
+                    Triple(
+                        first = it,
+                        second = viewModel.isPlayedBefore,
+                        third = folder!!.uid
+                    )
+                )
                 viewModel.readyToPlay = false
             }
         }
@@ -299,9 +314,13 @@ fun ExploreFolderScreen(
                     )
                 )
             },
-            onDismissRequest = { deleteBoardDialog = false },
+            onDismissRequest = {
+                deleteBoardDialog = false
+            },
             dismissButton = {
-                TextButton(onClick = { deleteBoardDialog = false }) {
+                TextButton(onClick = {
+                    deleteBoardDialog = false
+                }) {
                     Text(stringResource(R.string.action_cancel))
                 }
             },
@@ -325,7 +344,9 @@ fun ExploreFolderScreen(
         MoveSudokuToFolderDialog(
             availableFolders = folders.filter { it != folder },
             onDismiss = { moveSelectedDialog = false },
-            onConfirmMove = { folderUid -> viewModel.moveBoards(folderUid) }
+            onConfirmMove = { folderUid ->
+                viewModel.moveBoards(folderUid)
+            }
         )
     }
 
@@ -530,7 +551,7 @@ private fun IconWithText(
     imageVector: ImageVector,
     text: String,
     enabled: Boolean = true,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -553,7 +574,7 @@ private fun IconWithText(
 private fun DefaultTopAppBar(
     title: @Composable () -> Unit,
     navigateBack: () -> Unit,
-    onImportMenuClick: () -> Unit
+    onImportMenuClick: () -> Unit,
 ) {
     TopAppBar(
         title = title,
@@ -566,7 +587,9 @@ private fun DefaultTopAppBar(
             }
         },
         actions = {
-            var showMenu by remember { mutableStateOf(false) }
+            var showMenu by remember {
+                mutableStateOf(false)
+            }
             Box {
                 IconButton(onClick = { showMenu = !showMenu }) {
                     Icon(
@@ -608,7 +631,7 @@ private fun SelectionTopAppbar(
     onCloseClick: () -> Unit,
     onClickMoveSelected: () -> Unit,
     onClickDeleteSelected: () -> Unit,
-    onClickSelectAll: () -> Unit
+    onClickSelectAll: () -> Unit,
 ) {
     TopAppBar(
         title = title,
@@ -648,7 +671,7 @@ private fun MoveSudokuToFolderDialog(
     availableFolders: List<Folder>,
     onDismiss: () -> Unit,
     onConfirmMove: (Long) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     AlertDialog(
         modifier = modifier,

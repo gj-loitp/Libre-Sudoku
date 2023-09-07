@@ -92,7 +92,7 @@ fun FoldersScreen(
     navigateBack: () -> Unit,
     navigateExploreFolder: (Int) -> Unit,
     navigateImportSudokuFile: (String) -> Unit,
-    navigateViewSavedGame: (Long) -> Unit
+    navigateViewSavedGame: (Long) -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
@@ -530,7 +530,6 @@ fun FolderItem(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NameActionDialog(
     title: @Composable () -> Unit,

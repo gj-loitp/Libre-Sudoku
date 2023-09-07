@@ -39,7 +39,7 @@ class CreateSudokuViewModel @Inject constructor(
     private val getBoardUseCase: GetBoardUseCase,
     private val updateBoardUseCase: UpdateBoardUseCase,
     private val insertBoardUseCase: InsertBoardUseCase,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     val gameUid = savedStateHandle.get<Long>("game_uid") ?: -1L
     private val folderUid = savedStateHandle.get<Long>("folder_uid")
@@ -87,13 +87,13 @@ class CreateSudokuViewModel @Inject constructor(
     var gameBoard by mutableStateOf(List(gameType.size) { row ->
         List(gameType.size) { col ->
             Cell(
-                row,
-                col,
-                0
+                row = row,
+                col = col,
+                value = 0
             )
         }
     })
-    var currCell by mutableStateOf(Cell(-1, -1, 0))
+    var currCell by mutableStateOf(Cell(row = -1, col = -1, value = 0))
 
     var importStringValue by mutableStateOf("")
     var importTextFieldError by mutableStateOf(false)
@@ -113,7 +113,7 @@ class CreateSudokuViewModel @Inject constructor(
     fun processInput(cell: Cell): Boolean {
         currCell =
             if (currCell.row == cell.row && currCell.col == cell.col && digitFirstNumber == 0) {
-                Cell(-1, -1)
+                Cell(row = -1, col = -1)
             } else {
                 cell
             }
@@ -121,7 +121,7 @@ class CreateSudokuViewModel @Inject constructor(
         return if (currCell.row >= 0 && currCell.col >= 0) {
             if ((inputMethod.value == 1 || overrideInputMethodDF) && digitFirstNumber > 0) {
                 processNumberInput(digitFirstNumber)
-                undoRedoManager.addState(GameState(getBoardNoRef(), emptyList()))
+                undoRedoManager.addState(GameState(board = getBoardNoRef(), notes = emptyList()))
             }
             true
         } else {
@@ -135,16 +135,16 @@ class CreateSudokuViewModel @Inject constructor(
                 overrideInputMethodDF = false
                 digitFirstNumber = 0
                 processNumberInput(number)
-                undoRedoManager.addState(GameState(getBoardNoRef(), emptyList()))
+                undoRedoManager.addState(GameState(board = getBoardNoRef(), notes = emptyList()))
             } else if (inputMethod.value == 1) {
                 digitFirstNumber = if (digitFirstNumber == number) 0 else number
-                currCell = Cell(-1, -1, digitFirstNumber)
+                currCell = Cell(row = -1, col = -1, value = digitFirstNumber)
             }
         } else {
             if (inputMethod.value == 0) {
                 overrideInputMethodDF = true
                 digitFirstNumber = if (digitFirstNumber == number) 0 else number
-                currCell = Cell(-1, -1, digitFirstNumber)
+                currCell = Cell(row = -1, col = -1, value = digitFirstNumber)
             }
         }
     }
@@ -161,7 +161,7 @@ class CreateSudokuViewModel @Inject constructor(
     private fun setValueCell(
         value: Int,
         row: Int = currCell.row,
-        col: Int = currCell.col
+        col: Int = currCell.col,
     ): List<List<Cell>> {
         val new = getBoardNoRef()
         new[row][col].value = value
@@ -176,11 +176,19 @@ class CreateSudokuViewModel @Inject constructor(
             return new
         }
 
-        new[row][col].error = !sudokuUtils.isValidCellDynamic(new, new[row][col], gameType)
+        new[row][col].error = !sudokuUtils.isValidCellDynamic(
+            board = new,
+            cell = new[row][col],
+            type = gameType
+        )
         new.forEach { cells ->
             cells.forEach { cell ->
                 if (cell.value != 0 && cell.error) {
-                    cell.error = !sudokuUtils.isValidCellDynamic(new, cell, gameType)
+                    cell.error = !sudokuUtils.isValidCellDynamic(
+                        board = new,
+                        cell = cell,
+                        type = gameType
+                    )
                 }
             }
         }
@@ -211,7 +219,12 @@ class CreateSudokuViewModel @Inject constructor(
                     val prevValue = gameBoard[currCell.row][currCell.col].value
                     gameBoard = setValueCell(0)
                     if (prevValue != 0) {
-                        undoRedoManager.addState(GameState(getBoardNoRef(), emptyList()))
+                        undoRedoManager.addState(
+                            GameState(
+                                board = getBoardNoRef(),
+                                notes = emptyList()
+                            )
+                        )
                     }
                     checkMistakes()
                 }
@@ -224,10 +237,12 @@ class CreateSudokuViewModel @Inject constructor(
     fun changeGameType(gameType: GameType) {
         if (this.gameType != gameType) {
             this.gameType = gameType
-            currCell = Cell(-1, -1, 0)
+            currCell = Cell(row = -1, col = -1, value = 0)
             digitFirstNumber = -1
             gameBoard =
-                List(gameType.size) { row -> List(gameType.size) { col -> Cell(row, col, 0) } }
+                List(gameType.size) { row ->
+                    List(gameType.size) { col -> Cell(row = row, col = col, value = 0) }
+                }
         }
     }
 
@@ -283,7 +298,11 @@ class CreateSudokuViewModel @Inject constructor(
                 val sudokuParser = SudokuParser()
                 initialBoard = sudokuParser.boardToString(gameBoard)
                 val solvedBoardList =
-                    List(gameType.size) { row -> List(gameType.size) { col -> Cell(row, col, 0) } }
+                    List(gameType.size) { row ->
+                        List(gameType.size) { col ->
+                            Cell(row = row, col = col, value = 0)
+                        }
+                    }
                 for (i in 0 until gameType.size) {
                     for (j in 0 until gameType.size) {
                         solvedBoardList[i][j].value = board[j + gameType.size * i]

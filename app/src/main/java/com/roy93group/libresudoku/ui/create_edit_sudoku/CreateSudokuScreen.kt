@@ -58,7 +58,7 @@ import com.roy93group.libresudoku.ui.utils.ReverseArrangement
 @Composable
 fun CreateSudokuScreen(
     navigateBack: () -> Unit,
-    viewModel: CreateSudokuViewModel
+    viewModel: CreateSudokuViewModel,
 ) {
     var importStringDialog by remember { mutableStateOf(false) }
     Scaffold(
@@ -123,8 +123,13 @@ fun CreateSudokuScreen(
             ) {
                 Row {
                     Box {
-                        var difficultyMenu by remember { mutableStateOf(false) }
-                        val dropDownIconRotation by animateFloatAsState(if (difficultyMenu) 180f else 0f)
+                        var difficultyMenu by remember {
+                            mutableStateOf(false)
+                        }
+                        val dropDownIconRotation by animateFloatAsState(
+                            if (difficultyMenu) 180f else 0f,
+                            label = ""
+                        )
                         TextButton(onClick = { difficultyMenu = !difficultyMenu }) {
                             Text(stringResource(viewModel.gameDifficulty.resName))
                             Icon(
@@ -145,7 +150,10 @@ fun CreateSudokuScreen(
                     if (viewModel.gameUid == -1L) {
                         Box {
                             var gameTypeMenuExpanded by remember { mutableStateOf(false) }
-                            val dropDownIconRotation by animateFloatAsState(if (gameTypeMenuExpanded) 180f else 0f)
+                            val dropDownIconRotation by animateFloatAsState(
+                                if (gameTypeMenuExpanded) 180f else 0f,
+                                label = ""
+                            )
                             TextButton(onClick = { gameTypeMenuExpanded = !gameTypeMenuExpanded }) {
                                 Text(stringResource(viewModel.gameType.resName))
                                 Icon(
@@ -165,7 +173,9 @@ fun CreateSudokuScreen(
                     }
                 }
                 FilledTonalButton(
-                    enabled = !viewModel.gameBoard.flatten().all { it.value == 0 },
+                    enabled = !viewModel.gameBoard.flatten().all {
+                        it.value == 0
+                    },
                     onClick = {
                         if (viewModel.saveGame()) {
                             navigateBack()
@@ -304,7 +314,7 @@ fun CreateSudokuScreen(
 private fun GameTypeMenu(
     expanded: Boolean,
     onDismissRequest: () -> Unit,
-    onClick: (GameType) -> Unit
+    onClick: (GameType) -> Unit,
 ) {
     MaterialTheme(shapes = MaterialTheme.shapes.copy(extraSmall = MaterialTheme.shapes.large)) {
         DropdownMenu(
@@ -330,14 +340,13 @@ private fun GameTypeMenu(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ImportStringSudokuDialog(
     textValue: String,
     onTextChange: (String) -> Unit,
     isError: Boolean,
     onConfirm: () -> Unit,
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
 ) {
     val focusRequester = FocusRequester()
     LaunchedEffect(Unit) {
@@ -385,7 +394,7 @@ private fun ImportStringSudokuDialog(
 private fun DifficultyMenu(
     expanded: Boolean,
     onDismissRequest: () -> Unit,
-    onClick: (GameDifficulty) -> Unit
+    onClick: (GameDifficulty) -> Unit,
 ) {
     MaterialTheme(shapes = MaterialTheme.shapes.copy(extraSmall = MaterialTheme.shapes.large)) {
         DropdownMenu(

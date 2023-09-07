@@ -30,7 +30,7 @@ class ExploreFolderViewModel @Inject constructor(
     private val deleteBoardUseCase: DeleteBoardUseCase,
     private val deleteBoardsUseCase: DeleteBoardsUseCase,
     getFoldersUseCase: GetFoldersUseCase,
-    savedStateHandle: SavedStateHandle
+    savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
     private val folderUid = savedStateHandle.get<Long>("uid") ?: 0
 
@@ -52,9 +52,11 @@ class ExploreFolderViewModel @Inject constructor(
             viewModelScope.launch {
                 val qqWingController = QQWingController()
                 val sudokuParser = SudokuParser()
-                val boardToSolve = board.initialBoard.map { it.digitToInt(13) }.toIntArray()
+                val boardToSolve = board.initialBoard.map {
+                    it.digitToInt(13)
+                }.toIntArray()
 
-                val solved = qqWingController.solve(boardToSolve, board.type)
+                val solved = qqWingController.solve(gameBoard = boardToSolve, gameType = board.type)
 
                 if (qqWingController.solutionCount == 1) {
                     updateBoardUseCase(

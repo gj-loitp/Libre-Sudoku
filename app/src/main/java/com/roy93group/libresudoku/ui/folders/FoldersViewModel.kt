@@ -30,7 +30,7 @@ class FoldersViewModel @Inject constructor(
     private val deleteFolderUseCase: DeleteFolderUseCase,
     private val getGamesInFolderUseCase: GetGamesInFolderUseCase,
     private val countPuzzlesFolderUseCase: CountPuzzlesFolderUseCase,
-    getLastSavedGamesAnyFolderUseCase: GetLastSavedGamesAnyFolderUseCase
+    getLastSavedGamesAnyFolderUseCase: GetLastSavedGamesAnyFolderUseCase,
 ) : ViewModel() {
     val folders = getFoldersUseCase()
 
@@ -60,7 +60,7 @@ class FoldersViewModel @Inject constructor(
             val numberPuzzles = mutableListOf<Pair<Long, Int>>()
             folders.forEach {
                 numberPuzzles.add(
-                    Pair(it.uid, countPuzzlesFolderUseCase(it.uid).toInt())
+                    Pair(first = it.uid, second = countPuzzlesFolderUseCase(it.uid).toInt())
                 )
             }
             puzzlesCountInFolder = numberPuzzles
