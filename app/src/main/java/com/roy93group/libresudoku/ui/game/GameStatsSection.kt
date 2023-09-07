@@ -44,7 +44,7 @@ fun AfterGameStats(
     notesTaken: Int,
     records: List<Record>,
     timeText: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
         Text(
@@ -173,7 +173,7 @@ fun AfterGameStats(
 fun StatBox(
     text: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    icon: @Composable () -> Unit = { }
+    icon: @Composable () -> Unit = { },
 ) {
     Box(
         modifier = modifier
@@ -197,7 +197,7 @@ fun StatBox(
 fun StatBoxWithBottomPadding(
     text: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    icon: @Composable () -> Unit = { }
+    icon: @Composable () -> Unit = { },
 ) {
     StatBox(
         text = text,

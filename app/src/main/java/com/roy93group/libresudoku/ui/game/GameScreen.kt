@@ -69,14 +69,13 @@ import com.roy93group.libresudoku.ui.onboarding.FirstGameDialog
 import com.roy93group.libresudoku.ui.utils.ReverseArrangement
 
 @OptIn(
-    ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class,
-    ExperimentalLayoutApi::class
+    ExperimentalMaterial3Api::class
 )
 @Composable
 fun GameScreen(
     navigateBack: () -> Unit,
     navigateSettings: () -> Unit,
-    viewModel: GameViewModel
+    viewModel: GameViewModel,
 ) {
     val localView = LocalView.current // vibration
 
@@ -94,7 +93,8 @@ fun GameScreen(
     var restartButtonAngleState by remember { mutableFloatStateOf(0f) }
     val restartButtonAnimation: Float by animateFloatAsState(
         targetValue = restartButtonAngleState,
-        animationSpec = tween(durationMillis = 250)
+        animationSpec = tween(durationMillis = 250),
+        label = ""
     )
 
     LaunchedEffect(Unit) {
@@ -139,7 +139,8 @@ fun GameScreen(
                             ) {
                                 AnimatedContent(
                                     if (viewModel.showSolution) stringResource(R.string.action_show_mine_sudoku)
-                                    else stringResource(R.string.action_show_solution)
+                                    else stringResource(R.string.action_show_solution),
+                                    label = ""
                                 ) {
                                     Text(it)
                                 }
@@ -149,11 +150,11 @@ fun GameScreen(
 
                     AnimatedVisibility(visible = !viewModel.endGame) {
                         val rotationAngle by animateFloatAsState(
-                            targetValue = if (viewModel.gamePlaying) 0f else 360f
+                            targetValue = if (viewModel.gamePlaying) 0f else 360f, label = ""
                         )
                         IconButton(onClick = {
                             if (!viewModel.gamePlaying) viewModel.startTimer() else viewModel.pauseTimer()
-                            viewModel.currCell = Cell(-1, -1, 0)
+                            viewModel.currCell = Cell(row = -1, col = -1, value = 0)
                         }) {
                             Icon(
                                 modifier = Modifier.rotate(rotationAngle),
@@ -254,14 +255,20 @@ fun GameScreen(
                 val positionLines by viewModel.positionLines.collectAsStateWithLifecycle(
                     initialValue = PreferencesConstants.DEFAULT_POSITION_LINES
                 )
-                val boardBlur by animateDpAsState(targetValue = if (viewModel.gamePlaying || viewModel.endGame) 0.dp else 10.dp)
-                val scale by animateFloatAsState(targetValue = if (viewModel.gamePlaying || viewModel.endGame) 1f else 0.90f)
+                val boardBlur by animateDpAsState(
+                    targetValue = if (viewModel.gamePlaying || viewModel.endGame) 0.dp else 10.dp,
+                    label = ""
+                )
+                val scale by animateFloatAsState(
+                    targetValue = if (viewModel.gamePlaying || viewModel.endGame) 1f else 0.90f,
+                    label = ""
+                )
                 val crossHighlight by viewModel.crossHighlight.collectAsStateWithLifecycle(
                     initialValue = PreferencesConstants.DEFAULT_BOARD_CROSS_HIGHLIGHT
                 )
 
                 val fontSizeFactor by viewModel.fontSize.collectAsStateWithLifecycle(initialValue = PreferencesConstants.DEFAULT_FONT_SIZE_FACTOR)
-                val fontSizeValue by remember(fontSizeFactor, viewModel.gameType) {
+                val fontSizeValue by remember(key1 = fontSizeFactor, key2 = viewModel.gameType) {
                     mutableStateOf(
                         viewModel.getFontSize(factor = fontSizeFactor)
                     )
@@ -283,7 +290,12 @@ fun GameScreen(
                         )
                     },
                     onLongClick = { cell ->
-                        if (viewModel.processInput(cell, remainingUse, longTap = true)) {
+                        if (viewModel.processInput(
+                                cell = cell,
+                                remainingUse = remainingUse,
+                                longTap = true
+                            )
+                        ) {
                             localView.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY)
                         }
                     },
@@ -303,7 +315,7 @@ fun GameScreen(
                 initialValue = PreferencesConstants.DEFAULT_FUN_KEYBOARD_OVER_NUM
             )
 
-            AnimatedContent(!viewModel.endGame) { contentState ->
+            AnimatedContent(!viewModel.endGame, label = "") { contentState ->
                 if (contentState) {
                     Column(
                         verticalArrangement = if (funKeyboardOverNum) ReverseArrangement else Arrangement.Top
@@ -497,7 +509,7 @@ fun GameScreen(
 
             Lifecycle.Event.ON_PAUSE -> {
                 viewModel.pauseTimer()
-                viewModel.currCell = Cell(-1, -1, 0)
+                viewModel.currCell = Cell(row = -1, col = -1, value = 0)
             }
 
             Lifecycle.Event.ON_DESTROY -> viewModel.pauseTimer()
@@ -618,7 +630,7 @@ fun GameMenu(
 @Composable
 fun TopBoardSection(
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier,

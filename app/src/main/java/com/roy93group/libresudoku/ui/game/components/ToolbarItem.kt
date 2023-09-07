@@ -38,12 +38,16 @@ fun ToolbarItem(
     painter: Painter,
     toggled: Boolean = false,
     onClick: () -> Unit = { },
-    onLongClick: () -> Unit = { }
+    onLongClick: () -> Unit = { },
 ) {
     Box(
         modifier = modifier
             .clip(MaterialTheme.shapes.large)
-            .background(if (toggled) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceColorAtElevation(2.dp))
+            .background(
+                if (toggled) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceColorAtElevation(
+                    2.dp
+                )
+            )
             .combinedClickable(
                 onClick = onClick,
                 onLongClick = onLongClick

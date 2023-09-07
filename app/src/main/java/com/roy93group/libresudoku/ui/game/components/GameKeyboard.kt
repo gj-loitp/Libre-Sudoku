@@ -35,11 +35,12 @@ fun KeyboardItem(
     remainingUses: Int? = null,
     onClick: (Int) -> Unit,
     onLongClick: (Int) -> Unit = { },
-    selected: Boolean = false
+    selected: Boolean = false,
 ) {
     val mutableInteractionSource by remember { mutableStateOf(MutableInteractionSource()) }
     val color by animateColorAsState(
-        targetValue = if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.5f) else Color.Transparent
+        targetValue = if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.5f) else Color.Transparent,
+        label = ""
     )
     val localView = LocalView.current
     val keyboardFontSize = if (remainingUses != null) {
@@ -95,7 +96,7 @@ fun DefaultGameKeyboard(
     onClick: (Int) -> Unit,
     onLongClick: (Int) -> Unit,
     size: Int,
-    selected: Int = 0
+    selected: Int = 0,
 ) {
     val numbers by remember(size) { mutableStateOf((1..size).toList()) }
 
@@ -179,7 +180,7 @@ fun DefaultGameKeyboard(
 @Composable
 private fun KeyboardRow(
     modifier: Modifier = Modifier,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     Row(
         modifier = Modifier

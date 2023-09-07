@@ -55,7 +55,7 @@ class GameViewModel @Inject constructor(
     private val getBoardUseCase: GetBoardUseCase,
     themeSettingsManager: ThemeSettingsManager,
     private val savedStateHandle: SavedStateHandle,
-    private val getAllRecordsUseCase: GetAllRecordsUseCase
+    private val getAllRecordsUseCase: GetAllRecordsUseCase,
 ) : ViewModel() {
     init {
         val sudokuParser = SudokuParser()
@@ -69,7 +69,6 @@ class GameViewModel @Inject constructor(
                 gameType = boardEntity.type
                 gameDifficulty = boardEntity.difficulty
             }
-
 
             withContext(Dispatchers.Default) {
                 initialBoard = sudokuParser.parseBoard(
@@ -106,7 +105,7 @@ class GameViewModel @Inject constructor(
                     gameBoard = initialBoard
                 }
                 size = gameBoard.size
-                undoRedoManager = UndoRedoManager(GameState(gameBoard, notes))
+                undoRedoManager = UndoRedoManager(GameState(board = gameBoard, notes = notes))
                 remainingUsesList = countRemainingUses(gameBoard)
             }
             saveGame()
@@ -142,9 +141,9 @@ class GameViewModel @Inject constructor(
 
     // mistakes checking method
     var mistakesMethod = appSettingsManager.highlightMistakes.stateIn(
-        viewModelScope,
-        SharingStarted.Eagerly,
-        PreferencesConstants.DEFAULT_HIGHLIGHT_MISTAKES
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = PreferencesConstants.DEFAULT_HIGHLIGHT_MISTAKES
     )
 
     var positionLines = appSettingsManager.positionLines
@@ -152,15 +151,15 @@ class GameViewModel @Inject constructor(
     val funKeyboardOverNum = appSettingsManager.funKeyboardOverNumbers
 
     var mistakesLimit = appSettingsManager.mistakesLimit.stateIn(
-        viewModelScope,
-        SharingStarted.Eagerly,
-        PreferencesConstants.DEFAULT_MISTAKES_LIMIT
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = PreferencesConstants.DEFAULT_MISTAKES_LIMIT
     )
 
     private var autoEraseNotes = appSettingsManager.autoEraseNotes.stateIn(
-        viewModelScope,
-        SharingStarted.Eagerly,
-        PreferencesConstants.DEFAULT_AUTO_ERASE_NOTES
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = PreferencesConstants.DEFAULT_AUTO_ERASE_NOTES
     )
 
     var resetTimerOnRestart = appSettingsManager.resetTimerEnabled
@@ -210,12 +209,14 @@ class GameViewModel @Inject constructor(
     var mistakesMade = 0
     var notesTaken = 0
 
-    val allRecords by lazy { getAllRecordsUseCase(gameDifficulty, gameType) }
+    val allRecords by lazy {
+        getAllRecordsUseCase(difficulty = gameDifficulty, type = gameType)
+    }
 
     private fun clearNotesAtCell(
         notes: List<Note>,
         row: Int = currCell.row,
-        col: Int = currCell.col
+        col: Int = currCell.col,
     ): List<Note> {
         return notes.minus(
             notes.filter { note ->
@@ -230,24 +231,34 @@ class GameViewModel @Inject constructor(
     fun clearNotes() {
         notes = emptyNotes()
         undoRedoManager.addState(
-            GameState(gameBoard, notes)
+            GameState(board = gameBoard, notes = notes)
         )
     }
 
-    private fun addNote(note: Int, row: Int, col: Int): List<Note> {
-        return notes.plus(Note(row, col, note))
+    private fun addNote(
+        note: Int,
+        row: Int,
+        col: Int,
+    ): List<Note> {
+        return notes.plus(Note(row = row, col = col, value = note))
     }
 
-    private fun removeNote(note: Int, row: Int, col: Int): List<Note> =
-        notes.minus(Note(row, col, note))
+    private fun removeNote(
+        note: Int,
+        row: Int,
+        col: Int,
+    ): List<Note> =
+        notes.minus(Note(row = row, col = col, value = note))
 
     private fun getBoardNoRef(): List<List<Cell>> =
-        gameBoard.map { items -> items.map { item -> item.copy() } }
+        gameBoard.map { items ->
+            items.map { item -> item.copy() }
+        }
 
     private fun setValueCell(
         value: Int,
         row: Int = currCell.row,
-        col: Int = currCell.col
+        col: Int = currCell.col,
     ): List<List<Cell>> {
         var new = getBoardNoRef()
 
@@ -266,7 +277,11 @@ class GameViewModel @Inject constructor(
         if (mistakesMethod.value == 1) {
             // rule violations
             new[row][col].error =
-                !sudokuUtils.isValidCellDynamic(new, new[row][col], boardEntity.type)
+                !sudokuUtils.isValidCellDynamic(
+                    board = new,
+                    cell = new[row][col],
+                    type = boardEntity.type
+                )
             new.forEach { cells ->
                 cells.forEach { cell ->
                     if (cell.value != 0 && cell.error) {
@@ -276,7 +291,7 @@ class GameViewModel @Inject constructor(
             }
         } else if (mistakesMethod.value == 2) {
             // check with final solution
-            new = isValidCell(new, new[row][col])
+            new = isValidCell(board = new, cell = new[row][col])
         }
 
         currCell.error = currCell.value == 0
@@ -296,7 +311,7 @@ class GameViewModel @Inject constructor(
         gameCompleted = isCompleted(new)
 
         if (autoEraseNotes.value) {
-            notes = autoEraseNotes(new, currCell)
+            notes = autoEraseNotes(board = new, cell = currCell)
         }
 
         return new
@@ -305,12 +320,16 @@ class GameViewModel @Inject constructor(
     private fun countRemainingUses(board: List<List<Cell>>): MutableList<Int> {
         val uses = mutableListOf<Int>()
         for (i in 0..size) {
-            uses.add(size - sudokuUtils.countNumberInBoard(board, i + 1))
+            uses.add(size - sudokuUtils.countNumberInBoard(board = board, number = i + 1))
         }
         return uses
     }
 
-    fun processInput(cell: Cell, remainingUse: Boolean, longTap: Boolean = false): Boolean {
+    fun processInput(
+        cell: Cell,
+        remainingUse: Boolean,
+        longTap: Boolean = false,
+    ): Boolean {
         if (gamePlaying) {
             currCell =
                 if (currCell.row == cell.row && currCell.col == cell.col && digitFirstNumber == 0) {
@@ -366,19 +385,18 @@ class GameViewModel @Inject constructor(
                 if (inputMethod.value == 0) {
                     overrideInputMethodDF = true
                     digitFirstNumber = if (digitFirstNumber == number) 0 else number
-                    currCell = Cell(-1, -1, digitFirstNumber)
+                    currCell = Cell(row = -1, col = -1, value = digitFirstNumber)
                 }
             }
             eraseButtonToggled = false
         }
     }
 
-
-    fun processNumberInput(number: Int) {
+    private fun processNumberInput(number: Int) {
         if (currCell.row >= 0 && currCell.col >= 0 && gamePlaying && !currCell.locked) {
             if (!notesToggled) {
                 // Clear all note to set a number
-                notes = clearNotesAtCell(notes, currCell.row, currCell.col)
+                notes = clearNotesAtCell(notes = notes, row = currCell.row, col = currCell.col)
 
                 gameBoard = setValueCell(
                     if (gameBoard[currCell.row][currCell.col].value == number) 0 else number
@@ -392,12 +410,12 @@ class GameViewModel @Inject constructor(
     }
 
     private fun setNote(number: Int) {
-        val note = Note(currCell.row, currCell.col, number)
+        val note = Note(row = currCell.row, col = currCell.col, value = number)
         notes = if (notes.contains(note)) {
-            removeNote(note.value, note.row, note.col)
+            removeNote(note = note.value, row = note.row, col = note.col)
         } else {
             notesTaken++
-            addNote(note.value, note.row, note.col)
+            addNote(note = note.value, row = note.row, col = note.col)
         }
     }
 
@@ -480,7 +498,7 @@ class GameViewModel @Inject constructor(
                         notes = clearNotesAtCell(notes)
                         gameBoard = setValueCell(0)
                         if (prevValue != 0 || notesInCell != 0) {
-                            undoRedoManager.addState(GameState(gameBoard, notes))
+                            undoRedoManager.addState(GameState(board = gameBoard, notes = notes))
                         }
                     }
                 }
@@ -491,7 +509,7 @@ class GameViewModel @Inject constructor(
     private fun useHint() {
         if (solvedBoard.isEmpty()) solveBoard()
         if (currCell.row >= 0 && currCell.col >= 0 && !currCell.locked) {
-            notes = clearNotesAtCell(notes, currCell.row, currCell.col)
+            notes = clearNotesAtCell(notes = notes, row = currCell.row, col = currCell.col)
             gameBoard = setValueCell(solvedBoard[currCell.row][currCell.col].value)
 
             val new = getBoardNoRef()
@@ -500,7 +518,7 @@ class GameViewModel @Inject constructor(
 
             duration = duration.plus(30.toDuration(DurationUnit.SECONDS))
             timeText = duration.toFormattedString()
-            undoRedoManager.addState(GameState(gameBoard, notes))
+            undoRedoManager.addState(GameState(board = gameBoard, notes = notes))
             hintsUsed++
         }
     }
@@ -508,7 +526,7 @@ class GameViewModel @Inject constructor(
     fun resetGame(resetTimer: Boolean) {
         // stop and reset game
         notes = emptyNotes()
-        currCell = Cell(-1, -1, 0)
+        currCell = Cell(row = -1, col = -1, value = 0)
         if (resetTimer) {
             duration = Duration.ZERO
             timeText = duration.toFormattedString()
@@ -518,7 +536,9 @@ class GameViewModel @Inject constructor(
         undoRedoManager.clear()
 
         // init a new game with initial board
-        gameBoard = initialBoard.map { items -> items.map { item -> item.copy() } }
+        gameBoard = initialBoard.map { items ->
+            items.map { item -> item.copy() }
+        }
 
         remainingUsesList = countRemainingUses(gameBoard)
 
@@ -529,7 +549,7 @@ class GameViewModel @Inject constructor(
 
     private fun isValidCell(
         board: List<List<Cell>> = getBoardNoRef(),
-        cell: Cell
+        cell: Cell,
     ): List<List<Cell>> {
         if (solvedBoard.isNotEmpty()) {
             board[cell.row][cell.col].error =
@@ -566,15 +586,20 @@ class GameViewModel @Inject constructor(
     }
 
     fun computeNotes() {
-        notes = sudokuUtils.computeNotes(gameBoard, boardEntity.type)
-        undoRedoManager.addState(GameState(gameBoard, notes))
+        notes = sudokuUtils.computeNotes(board = gameBoard, type = boardEntity.type)
+        undoRedoManager.addState(GameState(board = gameBoard, notes = notes))
     }
 
     private fun autoEraseNotes(board: List<List<Cell>> = getBoardNoRef(), cell: Cell): List<Note> {
         if (currCell.row < 0 || currCell.col < 0) {
             return notes
         }
-        return sudokuUtils.autoEraseNotes(board, notes, cell, boardEntity.type)
+        return sudokuUtils.autoEraseNotes(
+            board = board,
+            notes = notes,
+            cell = cell,
+            type = boardEntity.type
+        )
     }
 
     private suspend fun saveGame() {
@@ -614,8 +639,8 @@ class GameViewModel @Inject constructor(
             mistakesCount = savedGame.mistakes
             val sudokuParser = SudokuParser()
             gameBoard = sudokuParser.parseBoard(
-                savedGame.currentBoard,
-                boardEntity.type
+                board = savedGame.currentBoard,
+                gameType = boardEntity.type
             )
             notes = sudokuParser.parseNotes(savedGame.notes)
 
@@ -644,7 +669,7 @@ class GameViewModel @Inject constructor(
     fun giveUp() {
         giveUp = true
         endGame = true
-        currCell = Cell(-1, -1, 0)
+        currCell = Cell(row = -1, col = -1, value = 0)
         viewModelScope.launch(Dispatchers.IO) {
             val savedGame = savedGameRepository.get(boardEntity.uid)
             if (savedGame != null) {
@@ -678,11 +703,11 @@ class GameViewModel @Inject constructor(
             )
         }
         pauseTimer()
-        currCell = Cell(-1, -1, 0)
+        currCell = Cell(row = -1, col = -1, value = 0)
     }
 
     fun getFontSize(type: GameType = gameType, factor: Int): TextUnit {
-        return sudokuUtils.getFontSize(type, factor)
+        return sudokuUtils.getFontSize(type = type, factor = factor)
     }
 
     fun setFirstGameFalse() {
@@ -693,7 +718,7 @@ class GameViewModel @Inject constructor(
 
     fun toggleEraseButton() {
         notesToggled = false
-        currCell = Cell(-1, -1, 0)
+        currCell = Cell(row = -1, col = -1, value = 0)
         digitFirstNumber = -1
         eraseButtonToggled = !eraseButtonToggled
     }
@@ -701,15 +726,17 @@ class GameViewModel @Inject constructor(
     // to make sure that solvedBoard really contains a solved board
     private fun solveBoard() {
         val qqWing = QQWingController()
-        val boardToSolve = boardEntity.initialBoard.map { it.digitToInt(13) }.toIntArray()
-        val solved = qqWing.solve(boardToSolve, boardEntity.type)
+        val boardToSolve = boardEntity.initialBoard.map {
+            it.digitToInt(13)
+        }.toIntArray()
+        val solved = qqWing.solve(gameBoard = boardToSolve, gameType = boardEntity.type)
 
         val newSolvedBoard = List(boardEntity.type.size) { row ->
             List(boardEntity.type.size) { col ->
                 Cell(
-                    row,
-                    col,
-                    0
+                    row = row,
+                    col = col,
+                    value = 0
                 )
             }
         }
@@ -751,12 +778,16 @@ class GameViewModel @Inject constructor(
                         1 -> {
                             // rules violations
                             new[i][j].error =
-                                !sudokuUtils.isValidCellDynamic(new, new[i][j], boardEntity.type)
+                                !sudokuUtils.isValidCellDynamic(
+                                    board = new,
+                                    cell = new[i][j],
+                                    type = boardEntity.type
+                                )
                         }
 
                         2 -> {
                             // check with final solution
-                            new = isValidCell(new, new[i][j])
+                            new = isValidCell(board = new, cell = new[i][j])
                         }
                     }
                 }
