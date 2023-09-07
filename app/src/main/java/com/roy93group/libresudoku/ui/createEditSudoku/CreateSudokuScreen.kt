@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.create_edit_sudoku
+package com.roy93group.libresudoku.ui.createEditSudoku
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Arrangement

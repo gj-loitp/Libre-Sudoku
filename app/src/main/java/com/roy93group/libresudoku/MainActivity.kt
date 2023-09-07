@@ -47,8 +47,8 @@ import com.roy93group.libresudoku.core.PreferencesConstants
 import com.roy93group.libresudoku.data.datastore.AppSettingsManager
 import com.roy93group.libresudoku.data.datastore.ThemeSettingsManager
 import com.roy93group.libresudoku.ui.components.animatedComposable
-import com.roy93group.libresudoku.ui.create_edit_sudoku.CreateSudokuScreen
-import com.roy93group.libresudoku.ui.explore_folder.ExploreFolderScreen
+import com.roy93group.libresudoku.ui.createEditSudoku.CreateSudokuScreen
+import com.roy93group.libresudoku.ui.exploreFolder.ExploreFolderScreen
 import com.roy93group.libresudoku.ui.folders.FoldersScreen
 import com.roy93group.libresudoku.ui.game.GameScreen
 import com.roy93group.libresudoku.ui.gamesHistory.GamesHistoryScreen

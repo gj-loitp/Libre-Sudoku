@@ -11,7 +11,7 @@ import com.roy93group.libresudoku.data.database.model.SavedGame
 import com.roy93group.libresudoku.data.database.model.SudokuBoard
 import com.roy93group.libresudoku.data.datastore.AppSettingsManager
 import com.roy93group.libresudoku.domain.repository.SavedGameRepository
-import com.roy93group.libresudoku.ui.create_edit_sudoku.GameStateFilter
+import com.roy93group.libresudoku.ui.createEditSudoku.GameStateFilter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

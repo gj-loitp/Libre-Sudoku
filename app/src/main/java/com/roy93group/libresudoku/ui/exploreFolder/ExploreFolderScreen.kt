@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.explore_folder
+package com.roy93group.libresudoku.ui.exploreFolder
 
 import android.net.Uri
 import androidx.activity.compose.BackHandler
@@ -6,7 +6,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandHorizontally

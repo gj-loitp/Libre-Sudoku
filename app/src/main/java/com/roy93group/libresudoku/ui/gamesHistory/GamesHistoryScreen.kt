@@ -61,7 +61,7 @@ import com.roy93group.libresudoku.ui.components.AnimatedIconFilterChip
 import com.roy93group.libresudoku.ui.components.EmptyScreen
 import com.roy93group.libresudoku.ui.components.ScrollbarLazyColumn
 import com.roy93group.libresudoku.ui.components.board.BoardPreview
-import com.roy93group.libresudoku.ui.create_edit_sudoku.GameStateFilter
+import com.roy93group.libresudoku.ui.createEditSudoku.GameStateFilter
 import com.roy93group.libresudoku.ui.utils.disableSplitMotionEvents
 import kotlinx.coroutines.launch
 import java.time.format.DateTimeFormatter
