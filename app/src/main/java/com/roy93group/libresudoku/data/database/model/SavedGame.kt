@@ -1,5 +1,6 @@
 package com.roy93group.libresudoku.data.database.model
 
+import androidx.annotation.Keep
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -8,6 +9,7 @@ import androidx.room.PrimaryKey
 import java.time.Duration
 import java.time.ZonedDateTime
 
+@Keep
 @Entity(
     tableName = "saved_game",
     foreignKeys = [ForeignKey(

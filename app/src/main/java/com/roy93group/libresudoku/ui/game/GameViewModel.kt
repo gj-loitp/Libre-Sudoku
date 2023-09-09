@@ -694,7 +694,7 @@ class GameViewModel @Inject constructor(
             saveGame()
             recordRepository.insert(
                 Record(
-                    board_uid = boardEntity.uid,
+                    boardUid = boardEntity.uid,
                     type = boardEntity.type,
                     difficulty = boardEntity.difficulty,
                     date = ZonedDateTime.now(),

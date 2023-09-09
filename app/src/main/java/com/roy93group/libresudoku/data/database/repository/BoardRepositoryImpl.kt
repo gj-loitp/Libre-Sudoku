@@ -8,7 +8,7 @@ import com.roy93group.libresudoku.domain.repository.BoardRepository
 import kotlinx.coroutines.flow.Flow
 
 class BoardRepositoryImpl(
-    private val boardDao: BoardDao
+    private val boardDao: BoardDao,
 ) : BoardRepository {
     override fun getAll(): Flow<List<SudokuBoard>> =
         boardDao.getAll()

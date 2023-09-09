@@ -7,13 +7,14 @@ import com.roy93group.libresudoku.domain.repository.SavedGameRepository
 import kotlinx.coroutines.flow.Flow
 
 class SavedGameRepositoryImpl(
-    private val savedGameDao: SavedGameDao
+    private val savedGameDao: SavedGameDao,
 ) : SavedGameRepository {
     override fun getAll(): Flow<List<SavedGame>> = savedGameDao.getAll()
 
     override suspend fun get(uid: Long): SavedGame? = savedGameDao.get(uid)
 
-    override fun getWithBoards(): Flow<Map<SavedGame, SudokuBoard>> = savedGameDao.getSavedWithBoards()
+    override fun getWithBoards(): Flow<Map<SavedGame, SudokuBoard>> =
+        savedGameDao.getSavedWithBoards()
 
     override fun getLast(): Flow<SavedGame?> = savedGameDao.getLast()
 

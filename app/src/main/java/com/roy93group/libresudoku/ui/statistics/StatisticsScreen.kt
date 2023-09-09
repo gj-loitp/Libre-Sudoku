@@ -245,7 +245,7 @@ fun StatisticsScreen(
                                 type = stringResource(record.type.resName),
                                 dateFormat = dateFormat,
                                 onClick = {
-                                    navigateSavedGame(record.board_uid)
+                                    navigateSavedGame(record.boardUid)
                                 },
                                 onLongClick = {
                                     selectedIndex = index

@@ -20,7 +20,12 @@ import com.roy93group.libresudoku.data.database.model.SavedGame
 import com.roy93group.libresudoku.data.database.model.SudokuBoard
 
 @Database(
-    entities = [Record::class, SudokuBoard::class, SavedGame::class, Folder::class],
+    entities = [
+        Record::class,
+        SudokuBoard::class,
+        SavedGame::class,
+        Folder::class
+    ],
     version = 5,
     autoMigrations = [
         AutoMigration(from = 1, to = 2),
@@ -48,9 +53,9 @@ abstract class AppDatabase : RoomDatabase() {
         fun getInstance(context: Context): AppDatabase {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(
-                    context,
-                    AppDatabase::class.java,
-                    "main_database"
+                    context = context,
+                    klass = AppDatabase::class.java,
+                    name = "main_database"
                 ).build()
             }
 

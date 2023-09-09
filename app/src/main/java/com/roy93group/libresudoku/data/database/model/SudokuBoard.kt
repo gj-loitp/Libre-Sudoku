@@ -1,5 +1,6 @@
 package com.roy93group.libresudoku.data.database.model
 
+import androidx.annotation.Keep
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -7,6 +8,7 @@ import androidx.room.PrimaryKey
 import com.roy93group.libresudoku.core.qqwing.GameDifficulty
 import com.roy93group.libresudoku.core.qqwing.GameType
 
+@Keep
 @Entity(
     tableName = "board",
     foreignKeys = [
@@ -24,5 +26,5 @@ data class SudokuBoard(
     @ColumnInfo(name = "solved_board") val solvedBoard: String,
     @ColumnInfo(name = "difficulty") val difficulty: GameDifficulty,
     @ColumnInfo(name = "type") val type: GameType,
-    @ColumnInfo(name = "folder_id", defaultValue = "null") val folderId: Long? = null
+    @ColumnInfo(name = "folder_id", defaultValue = "null") val folderId: Long? = null,
 )

@@ -1,5 +1,6 @@
 package com.roy93group.libresudoku.data.database.model
 
+import androidx.annotation.Keep
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -10,6 +11,7 @@ import com.roy93group.libresudoku.core.qqwing.GameType
 import java.time.Duration
 import java.time.ZonedDateTime
 
+@Keep
 @Entity(
     tableName = "record",
     foreignKeys = [ForeignKey(
@@ -20,9 +22,9 @@ import java.time.ZonedDateTime
     )]
 )
 data class Record(
-    @PrimaryKey @ColumnInfo(name = "board_uid") val board_uid: Long,
+    @PrimaryKey @ColumnInfo(name = "board_uid") val boardUid: Long,
     @ColumnInfo(name = "type") val type: GameType,
     @ColumnInfo(name = "difficulty") val difficulty: GameDifficulty,
     @ColumnInfo(name = "date") val date: ZonedDateTime,
-    @ColumnInfo(name = "time") val time: Duration
+    @ColumnInfo(name = "time") val time: Duration,
 )
