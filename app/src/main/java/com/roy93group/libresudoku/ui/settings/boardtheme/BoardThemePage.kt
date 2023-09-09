@@ -9,7 +9,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Palette
 import androidx.compose.material.icons.rounded.GridGoldenratio
 import androidx.compose.material.icons.rounded.GridOn
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
@@ -32,9 +31,9 @@ import com.roy93group.libresudoku.core.Cell
 import com.roy93group.libresudoku.core.PreferencesConstants
 import com.roy93group.libresudoku.ui.components.PreferenceRowSwitch
 import com.roy93group.libresudoku.ui.components.board.Board
-import com.roy93group.libresudoku.ui.components.collapsing_topappbar.CollapsingTitle
-import com.roy93group.libresudoku.ui.components.collapsing_topappbar.CollapsingTopAppBar
-import com.roy93group.libresudoku.ui.components.collapsing_topappbar.rememberTopAppBarScrollBehavior
+import com.roy93group.libresudoku.ui.components.collapsingTopAppBar.CollapsingTitle
+import com.roy93group.libresudoku.ui.components.collapsingTopAppBar.CollapsingTopAppBar
+import com.roy93group.libresudoku.ui.components.collapsingTopAppBar.rememberTopAppBarScrollBehavior
 
 @Composable
 fun SettingsBoardTheme(

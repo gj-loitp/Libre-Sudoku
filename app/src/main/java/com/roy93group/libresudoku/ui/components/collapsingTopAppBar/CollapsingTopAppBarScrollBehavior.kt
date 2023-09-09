@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.ui.components.collapsing_topappbar
+package com.roy93group.libresudoku.ui.components.collapsingTopAppBar
 
 import androidx.compose.animation.core.AnimationState
 import androidx.compose.animation.core.DecayAnimationSpec

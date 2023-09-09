@@ -48,9 +48,9 @@ import com.roy93group.libresudoku.data.datastore.AppSettingsManager
 import com.roy93group.libresudoku.ui.components.PreferenceRow
 import com.roy93group.libresudoku.ui.components.PreferenceRowSwitch
 import com.roy93group.libresudoku.ui.components.ScrollbarLazyColumn
-import com.roy93group.libresudoku.ui.components.collapsing_topappbar.CollapsingTitle
-import com.roy93group.libresudoku.ui.components.collapsing_topappbar.CollapsingTopAppBar
-import com.roy93group.libresudoku.ui.components.collapsing_topappbar.rememberTopAppBarScrollBehavior
+import com.roy93group.libresudoku.ui.components.collapsingTopAppBar.CollapsingTitle
+import com.roy93group.libresudoku.ui.components.collapsingTopAppBar.CollapsingTopAppBar
+import com.roy93group.libresudoku.ui.components.collapsingTopAppBar.rememberTopAppBarScrollBehavior
 import com.roy93group.libresudoku.ui.settings.components.AppThemePreviewItem
 import com.roy93group.libresudoku.ui.theme.AppColorScheme
 import com.roy93group.libresudoku.ui.theme.AppTheme
