@@ -99,8 +99,7 @@ private suspend fun flingTopAppBar(
         AnimationState(
             initialValue = 0f,
             initialVelocity = initialVelocity,
-        )
-            .animateDecay(flingAnimationSpec) {
+        ).animateDecay(flingAnimationSpec) {
                 val delta = value - lastValue
                 val initialHeightOffset = state.heightOffset
                 state.heightOffset = initialHeightOffset + delta
@@ -119,9 +118,7 @@ private suspend fun flingTopAppBar(
 private suspend fun snapTopAppBar(state: CollapsingTopAppBarScrollState) {
     // In case the app bar motion was stopped in a state where it's partially visible, snap it to
     // the nearest state.
-    if (state.heightOffset < 0 &&
-        state.heightOffset > state.heightOffsetLimit
-    ) {
+    if (state.heightOffset < 0 && state.heightOffset > state.heightOffsetLimit) {
         AnimationState(
             initialValue = state.heightOffset
         ).animateTo(
@@ -137,6 +134,5 @@ private suspend fun snapTopAppBar(state: CollapsingTopAppBarScrollState) {
 fun rememberTopAppBarScrollBehavior() = CollapsingTopAppBarScrollBehavior(
     state = rememberTopAppBarScrollState(
         initialHeightOffsetLimit = -Float.MAX_VALUE
-    ),
-    flingAnimationSpec = rememberSplineBasedDecay()
+    ), flingAnimationSpec = rememberSplineBasedDecay()
 )

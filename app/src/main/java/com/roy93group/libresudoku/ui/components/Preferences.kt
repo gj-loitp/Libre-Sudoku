@@ -40,7 +40,7 @@ fun PreferenceRow(
     onLongClick: (() -> Unit)? = null,
     subtitle: String? = null,
     action: @Composable (() -> Unit)? = null,
-    shape: Shape = MaterialTheme.shapes.medium
+    shape: Shape = MaterialTheme.shapes.medium,
 ) {
     val height = if (subtitle != null) 72.dp else 56.dp
 

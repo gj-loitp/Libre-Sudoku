@@ -22,7 +22,7 @@ import com.roy93group.libresudoku.ui.utils.LightDarkPreview
 fun EmptyScreen(
     text: String,
     modifier: Modifier = Modifier,
-    content: @Composable () -> Unit = { }
+    content: @Composable () -> Unit = { },
 ) {
     val emptyFace by remember {
         mutableStateOf(

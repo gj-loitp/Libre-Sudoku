@@ -16,30 +16,18 @@ fun NavGraphBuilder.animatedComposable(
     route: String,
     arguments: List<NamedNavArgument> = emptyList(),
     deepLinks: List<NavDeepLink> = emptyList(),
-    content: @Composable AnimatedVisibilityScope.(NavBackStackEntry) -> Unit
-) = composable(
-    route = route,
-    arguments = arguments,
-    deepLinks = deepLinks,
-    enterTransition = {
-        fadeIn(animationSpec = tween(220, delayMillis = 90)) +
-                scaleIn(
-                    initialScale = 0.92f,
-                    animationSpec = tween(220, delayMillis = 90)
-                )
-    },
-    exitTransition = {
-        fadeOut(animationSpec = tween(90))
-    },
-    popEnterTransition = {
-        fadeIn(animationSpec = tween(220, delayMillis = 90)) +
-                scaleIn(
-                    initialScale = 0.92f,
-                    animationSpec = tween(220, delayMillis = 90)
-                )
-    },
-    popExitTransition = {
-        fadeOut(animationSpec = tween(90))
-    },
-    content = content
+    content: @Composable AnimatedVisibilityScope.(NavBackStackEntry) -> Unit,
+) = composable(route = route, arguments = arguments, deepLinks = deepLinks, enterTransition = {
+    fadeIn(animationSpec = tween(220, delayMillis = 90)) + scaleIn(
+        initialScale = 0.92f, animationSpec = tween(220, delayMillis = 90)
+    )
+}, exitTransition = {
+    fadeOut(animationSpec = tween(90))
+}, popEnterTransition = {
+    fadeIn(animationSpec = tween(220, delayMillis = 90)) + scaleIn(
+        initialScale = 0.92f, animationSpec = tween(220, delayMillis = 90)
+    )
+}, popExitTransition = {
+    fadeOut(animationSpec = tween(90))
+}, content = content
 )

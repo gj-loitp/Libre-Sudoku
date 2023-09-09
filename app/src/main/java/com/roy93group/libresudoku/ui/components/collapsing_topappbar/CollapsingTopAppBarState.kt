@@ -66,7 +66,6 @@ class CollapsingTopAppBarScrollState(
      *
      * This value is updated by a [CollapsingTopAppBarScrollBehavior] whenever a nested scroll connection
      * consumes scroll events. A common implementation would update the value to be the sum of all
-     * [NestedScrollConnection.onPostScroll] `consumed.y` values.
      */
     var contentOffset by mutableFloatStateOf(initialContentOffset)
 
@@ -90,7 +89,7 @@ class CollapsingTopAppBarScrollState(
 internal fun rememberTopAppBarScrollState(
     initialHeightOffsetLimit: Float = -Float.MAX_VALUE,
     initialHeightOffset: Float = 0f,
-    initialContentOffset: Float = 0f
+    initialContentOffset: Float = 0f,
 ) = rememberSaveable(saver = CollapsingTopAppBarScrollState.Saver) {
     CollapsingTopAppBarScrollState(
         initialHeightOffsetLimit,

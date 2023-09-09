@@ -18,7 +18,7 @@ fun HelpCard(
     title: String,
     details: String,
     painter: Painter?,
-    onCloseClicked: () -> Unit
+    onCloseClicked: () -> Unit,
 ) {
     Card(
         modifier = modifier
