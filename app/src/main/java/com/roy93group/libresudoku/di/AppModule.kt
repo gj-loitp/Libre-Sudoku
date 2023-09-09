@@ -26,19 +26,20 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 const val ACRA_SHARED_PREFS_NAME = "acra_shared_pref"
+
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
     @Provides
     @Singleton
-    fun provideAcraSharedPrefs(@ApplicationContext context: Context): SharedPreferences
-        = context.getSharedPreferences(ACRA_SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+    fun provideAcraSharedPrefs(@ApplicationContext context: Context): SharedPreferences =
+        context.getSharedPreferences(ACRA_SHARED_PREFS_NAME, Context.MODE_PRIVATE)
 
     @Provides
     @Singleton
-    fun provideFolderRepository(folderDao: FolderDao): FolderRepository
-        = FolderRepositoryImpl(folderDao)
+    fun provideFolderRepository(folderDao: FolderDao): FolderRepository =
+        FolderRepositoryImpl(folderDao)
 
     @Provides
     @Singleton
@@ -74,7 +75,6 @@ class AppModule {
     @Singleton
     @Provides
     fun provideSavedGameDao(appDatabase: AppDatabase): SavedGameDao = appDatabase.savedGameDao()
-
 
     // settings datastore
     @Provides

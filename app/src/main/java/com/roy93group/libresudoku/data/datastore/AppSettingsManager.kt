@@ -256,7 +256,7 @@ class AppSettingsManager(context: Context) {
 
     suspend fun setLastSelectedGameDifficultyType(
         difficulty: GameDifficulty,
-        type: GameType
+        type: GameType,
     ) {
         dataStore.edit { settings ->
             var difficultyAndType = when (difficulty) {
@@ -314,10 +314,10 @@ class AppSettingsManager(context: Context) {
             "" -> {
                 DateTimeFormatter.ofPattern(
                     DateTimeFormatterBuilder.getLocalizedDateTimePattern(
-                        FormatStyle.SHORT,
-                        null,
-                        IsoChronology.INSTANCE,
-                        Locale.getDefault()
+                        /* dateStyle = */ FormatStyle.SHORT,
+                        /* timeStyle = */ null,
+                        /* chrono = */ IsoChronology.INSTANCE,
+                        /* locale = */ Locale.getDefault()
                     )
                 )
             }

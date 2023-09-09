@@ -6,7 +6,8 @@ import com.roy93group.libresudoku.domain.repository.RecordRepository
 import javax.inject.Inject
 
 class GetAllRecordsUseCase @Inject constructor(
-    private val recordRepository: RecordRepository
+    private val recordRepository: RecordRepository,
 ) {
-    operator fun invoke(difficulty: GameDifficulty, type: GameType) = recordRepository.getAll(difficulty, type)
+    operator fun invoke(difficulty: GameDifficulty, type: GameType) =
+        recordRepository.getAll(difficulty, type)
 }

@@ -5,7 +5,7 @@ import com.roy93group.libresudoku.domain.repository.FolderRepository
 import javax.inject.Inject
 
 class InsertFolderUseCase @Inject constructor(
-    private val folderRepository: FolderRepository
+    private val folderRepository: FolderRepository,
 ) {
     suspend operator fun invoke(folder: Folder) = folderRepository.insert(folder)
 }

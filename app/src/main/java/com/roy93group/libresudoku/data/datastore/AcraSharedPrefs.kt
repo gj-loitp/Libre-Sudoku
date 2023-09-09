@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Singleton
 class AcraSharedPrefs @Inject constructor(
-    @ApplicationContext context: Context
+    @ApplicationContext context: Context,
 ) {
     private val acraEnabledKey = ACRA.PREF_ENABLE_ACRA
 

@@ -49,7 +49,7 @@ fun BoardPreview(
         12 -> 9.sp
         else -> 22.sp
     },
-    boardColors: SudokuBoardColors
+    boardColors: SudokuBoardColors,
 ) {
     BoxWithConstraints(
         modifier = modifier
@@ -59,15 +59,23 @@ fun BoardPreview(
     ) {
         val maxWidth = constraints.maxWidth.toFloat()
 
-        val cellSize by remember(size) { mutableFloatStateOf(maxWidth / size.toFloat()) }
+        val cellSize by remember(size) {
+            mutableFloatStateOf(maxWidth / size.toFloat())
+        }
         val foregroundColor = boardColors.altForegroundColor
         val thickLineColor = boardColors.thickLineColor
         val thinLineColor = boardColors.thinLineColor
 
-        val vertThick by remember(size) { mutableIntStateOf(floor(sqrt(size.toFloat())).toInt()) }
-        val horThick by remember(size) { mutableIntStateOf(ceil(sqrt(size.toFloat())).toInt()) }
+        val vertThick by remember(size) {
+            mutableIntStateOf(floor(sqrt(size.toFloat())).toInt())
+        }
+        val horThick by remember(size) {
+            mutableIntStateOf(ceil(sqrt(size.toFloat())).toInt())
+        }
 
-        val fontSizePx = with(LocalDensity.current) { mainTextSize.toPx() }
+        val fontSizePx = with(LocalDensity.current) {
+            mainTextSize.toPx()
+        }
 
         val textPaint by remember {
             mutableStateOf(
@@ -78,7 +86,9 @@ fun BoardPreview(
                 }
             )
         }
-        val width by remember { mutableFloatStateOf(textPaint.measureText("1")) }
+        val width by remember {
+            mutableFloatStateOf(textPaint.measureText("1"))
+        }
         val boardStrokeWidth = with(LocalDensity.current) { 1.1.dp.toPx() }
         val thinLineWidth = with(LocalDensity.current) { 0.6.dp.toPx() }
         val thickLineWidth = with(LocalDensity.current) { 1.1.dp.toPx() }
@@ -114,7 +124,12 @@ fun BoardPreview(
             }
 
             val textBounds = Rect()
-            textPaint.getTextBounds("1", 0, 1, textBounds)
+            textPaint.getTextBounds(
+                /* text = */ "1",
+                /* start = */ 0,
+                /* end = */ 1,
+                /* bounds = */ textBounds
+            )
 
             drawIntoCanvas { canvas ->
                 if (board != null) {

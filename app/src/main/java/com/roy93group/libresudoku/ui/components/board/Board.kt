@@ -81,7 +81,7 @@ fun Board(
     cellsToHighlight: List<Cell>? = null,
     zoomable: Boolean = false,
     boardColors: SudokuBoardColors,
-    crossHighlight: Boolean = false
+    crossHighlight: Boolean = false,
 ) {
     BoxWithConstraints(
         modifier = modifier
@@ -92,11 +92,17 @@ fun Board(
         val maxWidth = constraints.maxWidth.toFloat()
 
         // single cell size
-        val cellSize by remember(size) { mutableFloatStateOf(maxWidth / size.toFloat()) }
+        val cellSize by remember(size) {
+            mutableFloatStateOf(maxWidth / size.toFloat())
+        }
         // div for notes in one row in cell
-        val cellSizeDivWidth by remember(size) { mutableFloatStateOf(cellSize / ceil(sqrt(size.toFloat()))) }
+        val cellSizeDivWidth by remember(size) {
+            mutableFloatStateOf(cellSize / ceil(sqrt(size.toFloat())))
+        }
         // div for note in one column in cell
-        val cellSizeDivHeight by remember(size) { mutableFloatStateOf(cellSize / floor(sqrt(size.toFloat()))) }
+        val cellSizeDivHeight by remember(size) {
+            mutableFloatStateOf(cellSize / floor(sqrt(size.toFloat())))
+        }
 
         val errorColor = boardColors.errorColor
         val foregroundColor = boardColors.foregroundColor
@@ -109,14 +115,26 @@ fun Board(
         // highlight (cells)
         val highlightColor = boardColors.highlightColor
 
-        val vertThick by remember(size) { mutableIntStateOf(floor(sqrt(size.toFloat())).toInt()) }
-        val horThick by remember(size) { mutableIntStateOf(ceil(sqrt(size.toFloat())).toInt()) }
+        val vertThick by remember(size) {
+            mutableIntStateOf(floor(sqrt(size.toFloat())).toInt())
+        }
+        val horThick by remember(size) {
+            mutableIntStateOf(ceil(sqrt(size.toFloat())).toInt())
+        }
 
-        var fontSizePx = with(LocalDensity.current) { mainTextSize.toPx() }
-        var noteSizePx = with(LocalDensity.current) { noteTextSize.toPx() }
+        var fontSizePx = with(LocalDensity.current) {
+            mainTextSize.toPx()
+        }
+        var noteSizePx = with(LocalDensity.current) {
+            noteTextSize.toPx()
+        }
 
-        val thinLineWidth = with(LocalDensity.current) { 1.3.dp.toPx() }
-        val thickLineWidth = with(LocalDensity.current) { 1.3.dp.toPx() }
+        val thinLineWidth = with(LocalDensity.current) {
+            1.3.dp.toPx()
+        }
+        val thickLineWidth = with(LocalDensity.current) {
+            1.3.dp.toPx()
+        }
 
         // paints
         // numbers
@@ -162,16 +180,16 @@ fun Board(
         }
 
         val context = LocalContext.current
-        LaunchedEffect(mainTextSize, noteTextSize, boardColors) {
+        LaunchedEffect(key1 = mainTextSize, key2 = noteTextSize, key3 = boardColors) {
             fontSizePx = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_SP,
-                mainTextSize.value,
-                context.resources.displayMetrics
+                /* unit = */ TypedValue.COMPLEX_UNIT_SP,
+                /* value = */ mainTextSize.value,
+                /* metrics = */ context.resources.displayMetrics
             )
             noteSizePx = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_SP,
-                noteTextSize.value,
-                context.resources.displayMetrics
+                /* unit = */ TypedValue.COMPLEX_UNIT_SP,
+                /* value = */ noteTextSize.value,
+                /* metrics = */ context.resources.displayMetrics
             )
             textPaint = Paint().apply {
                 color = foregroundColor.toArgb()
@@ -195,8 +213,12 @@ fun Board(
             }
         }
 
-        var zoom by remember(enabled) { mutableFloatStateOf(1f) }
-        var offset by remember(enabled) { mutableStateOf(Offset.Zero) }
+        var zoom by remember(enabled) {
+            mutableFloatStateOf(1f)
+        }
+        var offset by remember(enabled) {
+            mutableStateOf(Offset.Zero)
+        }
 
         val boardModifier = Modifier
             .fillMaxSize()
@@ -205,8 +227,14 @@ fun Board(
                     onTap = {
                         if (enabled) {
                             val totalOffset = it / zoom + offset
-                            val row = floor((totalOffset.y) / cellSize).toInt().coerceIn(board.indices)
-                            val column = floor((totalOffset.x) / cellSize).toInt().coerceIn(board.indices)
+                            val row =
+                                floor((totalOffset.y) / cellSize)
+                                    .toInt()
+                                    .coerceIn(board.indices)
+                            val column =
+                                floor((totalOffset.x) / cellSize)
+                                    .toInt()
+                                    .coerceIn(board.indices)
                             onClick(board[row][column])
                         }
                     },
@@ -255,7 +283,8 @@ fun Board(
                 TransformOrigin(0f, 0f).also { transformOrigin = it }
             }
         Canvas(
-            modifier = if (zoomable) boardModifier.then(zoomModifier) else boardModifier
+            modifier = if (zoomable) boardModifier.then(zoomModifier)
+            else boardModifier
         ) {
             if (selectedCell.row >= 0 && selectedCell.col >= 0) {
                 // current cell
@@ -265,7 +294,7 @@ fun Board(
                         x = selectedCell.col * cellSize,
                         y = selectedCell.row * cellSize
                     ),
-                    size = Size(cellSize, cellSize)
+                    size = Size(width = cellSize, height = cellSize)
                 )
                 if (positionLines) {
                     // vertical position line
@@ -275,7 +304,7 @@ fun Board(
                             x = selectedCell.col * cellSize,
                             y = 0f
                         ),
-                        size = Size(cellSize, maxWidth)
+                        size = Size(width = cellSize, height = maxWidth)
                     )
                     // horizontal position line
                     drawRect(
@@ -284,7 +313,7 @@ fun Board(
                             x = 0f,
                             y = selectedCell.row * cellSize
                         ),
-                        size = Size(maxWidth, cellSize)
+                        size = Size(width = maxWidth, height = cellSize)
                     )
                 }
             }
@@ -298,7 +327,7 @@ fun Board(
                                     x = board[i][j].col * cellSize,
                                     y = board[i][j].row * cellSize
                                 ),
-                                size = Size(cellSize, cellSize)
+                                size = Size(width = cellSize, height = cellSize)
                             )
                         }
                     }
@@ -311,7 +340,7 @@ fun Board(
                         x = it.col * cellSize,
                         y = it.row * cellSize
                     ),
-                    size = Size(cellSize, cellSize)
+                    size = Size(width = cellSize, height = cellSize)
                 )
             }
 
@@ -319,7 +348,7 @@ fun Board(
                 thickLineColor = thickLineColor,
                 thickLineWidth = thickLineWidth,
                 maxWidth = maxWidth,
-                cornerRadius = CornerRadius(15f, 15f)
+                cornerRadius = CornerRadius(x = 15f, y = 15f)
             )
 
             // horizontal line
@@ -380,7 +409,10 @@ fun Board(
                                     x = i * sectionWidth * cellSize,
                                     y = j * sectionHeight * cellSize
                                 ),
-                                size = Size(cellSize * sectionWidth, cellSize * sectionHeight)
+                                size = Size(
+                                    width = cellSize * sectionWidth,
+                                    height = cellSize * sectionHeight
+                                )
                             )
                         }
                     }
@@ -394,7 +426,7 @@ private fun DrawScope.drawBoardFrame(
     thickLineColor: Color,
     thickLineWidth: Float,
     maxWidth: Float,
-    cornerRadius: CornerRadius
+    cornerRadius: CornerRadius,
 ) {
     drawRoundRect(
         color = thickLineColor,
@@ -413,7 +445,7 @@ private fun DrawScope.drawNumbers(
     lockedTextPaint: Paint,
     textPaint: Paint,
     questions: Boolean,
-    cellSize: Float
+    cellSize: Float,
 ) {
     drawIntoCanvas { canvas ->
         for (i in 0 until size) {
@@ -432,9 +464,12 @@ private fun DrawScope.drawNumbers(
                     val textWidth = paint.measureText(textToDraw)
 
                     canvas.nativeCanvas.drawText(
-                        textToDraw,
+                        /* text = */ textToDraw,
+                        /* x = */
                         board[i][j].col * cellSize + (cellSize - textWidth) / 2f,
+                        /* y = */
                         board[i][j].row * cellSize + (cellSize + textBounds.height()) / 2f,
+                        /* paint = */
                         paint
                     )
                 }
@@ -449,25 +484,33 @@ private fun DrawScope.drawNotes(
     notes: List<Note>,
     cellSize: Float,
     cellSizeDivWidth: Float,
-    cellSizeDivHeight: Float
+    cellSizeDivHeight: Float,
 ) {
     val noteBounds = Rect()
-    paint.getTextBounds("1", 0, 1, noteBounds)
+    paint.getTextBounds(
+        /* text = */ "1",
+        /* start = */ 0,
+        /* end = */ 1,
+        /* bounds = */ noteBounds
+    )
 
     drawIntoCanvas { canvas ->
         notes.forEach { note ->
             val textToDraw = note.value.toString(16).uppercase()
             val noteTextMeasure = paint.measureText(textToDraw)
             canvas.nativeCanvas.drawText(
-                textToDraw,
+                /* text = */ textToDraw,
+                /* x = */
                 note.col * cellSize + cellSizeDivWidth / 2f + (cellSizeDivWidth * getNoteRowNumber(
-                    note.value,
-                    size
+                    number = note.value,
+                    size = size
                 )) - noteTextMeasure / 2f,
+                /* y = */
                 note.row * cellSize + cellSizeDivHeight / 2f + (cellSizeDivHeight * getNoteColumnNumber(
-                    note.value,
-                    size
+                    number = note.value,
+                    size = size
                 )) + noteBounds.height() / 2f,
+                /* paint = */
                 paint
             )
         }
@@ -546,11 +589,11 @@ private fun BoardPreviewLight() {
                     ).toList()
                 )
             }
-            val notes = listOf(Note(2, 3, 1), Note(2, 3, 5))
+            val notes = listOf(Note(row = 2, col = 3, value = 1), Note(row = 2, col = 3, value = 5))
             Board(
                 board = board,
                 notes = notes,
-                selectedCell = Cell(-1, -1),
+                selectedCell = Cell(row = -1, col = -1),
                 onClick = { },
                 boardColors = SudokuBoardColorsImpl(
                     foregroundColor = BoardColors.foregroundColor,
