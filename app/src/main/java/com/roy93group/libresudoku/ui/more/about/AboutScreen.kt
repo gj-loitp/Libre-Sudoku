@@ -88,28 +88,28 @@ fun AboutScreen(
 //            val uriHandler = LocalUriHandler.current
             PreferenceRow(
                 title = stringResource(R.string.rate),
-                painter = painterResource(R.drawable.ic_github_24dp),
+                painter = painterResource(R.drawable.baseline_rate_review_24),
                 onClick = {
                     activity.rateApp(activity.packageName)
                 }
             )
             PreferenceRow(
                 title = stringResource(R.string.more),
-                painter = painterResource(R.drawable.ic_github_24dp),
+                painter = painterResource(R.drawable.baseline_card_giftcard_24),
                 onClick = {
                     activity.moreApp()
                 }
             )
             PreferenceRow(
                 title = stringResource(R.string.share_app),
-                painter = painterResource(R.drawable.ic_github_24dp),
+                painter = painterResource(R.drawable.baseline_ios_share_24),
                 onClick = {
                     activity.shareApp()
                 }
             )
             PreferenceRow(
                 title = stringResource(R.string.policy),
-                painter = painterResource(R.drawable.ic_github_24dp),
+                painter = painterResource(R.drawable.baseline_local_police_24),
                 onClick = {
                     activity.openBrowserPolicy()
                 }
