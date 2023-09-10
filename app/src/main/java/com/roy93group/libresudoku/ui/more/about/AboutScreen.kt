@@ -1,5 +1,6 @@
 package com.roy93group.libresudoku.ui.more.about
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,11 +24,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.roy93group.libresudoku.BuildConfig
 import com.roy93group.libresudoku.R
+import com.roy93group.libresudoku.ext.moreApp
+import com.roy93group.libresudoku.ext.openBrowserPolicy
+import com.roy93group.libresudoku.ext.rateApp
+import com.roy93group.libresudoku.ext.shareApp
 import com.roy93group.libresudoku.ui.components.PreferenceRow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutScreen(
+    activity: Activity,
     navigateBack: () -> Unit,
     navigateOpenSourceLicenses: () -> Unit,
 ) {
@@ -77,22 +83,33 @@ fun AboutScreen(
                 painter = painterResource(R.drawable.ic_outline_info_24),
             )
 
-            val uriHandler = LocalUriHandler.current
+//            val uriHandler = LocalUriHandler.current
             PreferenceRow(
-                title = stringResource(R.string.about_github_project),
+                title = stringResource(R.string.rate),
                 painter = painterResource(R.drawable.ic_github_24dp),
                 onClick = {
-                    //TODO roy
-                    uriHandler.openUri("https://github.com/kaajjo/Libre-Sudoku")
+                    activity.rateApp(activity.packageName)
                 }
             )
-
             PreferenceRow(
-                title = stringResource(R.string.help_translate),
-                painter = painterResource(R.drawable.ic_weblate),
+                title = stringResource(R.string.more),
+                painter = painterResource(R.drawable.ic_github_24dp),
                 onClick = {
-                    //TODO roy
-                    uriHandler.openUri("https://hosted.weblate.org/engage/libresudoku/")
+                    activity.moreApp()
+                }
+            )
+            PreferenceRow(
+                title = stringResource(R.string.share_app),
+                painter = painterResource(R.drawable.ic_github_24dp),
+                onClick = {
+                    activity.shareApp()
+                }
+            )
+            PreferenceRow(
+                title = stringResource(R.string.policy),
+                painter = painterResource(R.drawable.ic_github_24dp),
+                onClick = {
+                    activity.openBrowserPolicy()
                 }
             )
 

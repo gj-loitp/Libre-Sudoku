@@ -202,6 +202,7 @@ class MainActivity : AppCompatActivity() {
 
                             animatedComposable(Route.ABOUT) {
                                 AboutScreen(
+                                    activity = this@MainActivity,
                                     navigateBack = { navController.popBackStack() },
                                     navigateOpenSourceLicenses = { navController.navigate(Route.OPEN_SOURCE_LICENSES) }
                                 )

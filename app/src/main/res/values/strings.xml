@@ -281,4 +281,8 @@
     <string name="pref_date_format_custom_label">Custom</string>
     <string name="theme_blue">Blue</string>
     <string name="redo">Redo</string>
+    <string name="rate">Rate app</string>
+    <string name="more">Get more apps</string>
+    <string name="share_app">Share app</string>
+    <string name="policy">Term and Policy</string>
 </resources>
