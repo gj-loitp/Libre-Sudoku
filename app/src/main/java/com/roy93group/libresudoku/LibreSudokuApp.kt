@@ -14,14 +14,13 @@ import java.time.LocalDate
 //TODO firebase
 //TODO ad
 
-//keystore
-
 //done
 //leak canary
 //permission ad id
 //ic_launcher
 //policy
 //rate app, more app, share app
+//keystore
 
 @HiltAndroidApp
 class LibreSudokuApp : Application() {
