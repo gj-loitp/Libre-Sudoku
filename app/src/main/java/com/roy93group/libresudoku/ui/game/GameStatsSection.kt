@@ -28,7 +28,7 @@ import com.roy93group.libresudoku.core.PreferencesConstants
 import com.roy93group.libresudoku.core.qqwing.GameDifficulty
 import com.roy93group.libresudoku.core.qqwing.GameType
 import com.roy93group.libresudoku.core.utils.toFormattedString
-import com.roy93group.libresudoku.data.database.model.Record
+import com.roy93group.libresudoku.data.db.model.Record
 import kotlin.time.toKotlinDuration
 
 @OptIn(ExperimentalLayoutApi::class)

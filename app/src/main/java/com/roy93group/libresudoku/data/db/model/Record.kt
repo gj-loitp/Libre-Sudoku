@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.data.database.model
+package com.roy93group.libresudoku.data.db.model
 
 import androidx.annotation.Keep
 import androidx.room.ColumnInfo

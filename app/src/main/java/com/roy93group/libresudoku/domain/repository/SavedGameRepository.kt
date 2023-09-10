@@ -1,7 +1,7 @@
 package com.roy93group.libresudoku.domain.repository
 
-import com.roy93group.libresudoku.data.database.model.SavedGame
-import com.roy93group.libresudoku.data.database.model.SudokuBoard
+import com.roy93group.libresudoku.data.db.model.SavedGame
+import com.roy93group.libresudoku.data.db.model.SudokuBoard
 import kotlinx.coroutines.flow.Flow
 
 interface SavedGameRepository {

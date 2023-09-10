@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.data.database
+package com.roy93group.libresudoku.data.db
 
 import android.content.Context
 import androidx.room.AutoMigration
@@ -6,18 +6,18 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.roy93group.libresudoku.data.database.converters.DurationConverter
-import com.roy93group.libresudoku.data.database.converters.GameDifficultyConverter
-import com.roy93group.libresudoku.data.database.converters.GameTypeConverter
-import com.roy93group.libresudoku.data.database.converters.ZonedDateTimeConverter
-import com.roy93group.libresudoku.data.database.dao.BoardDao
-import com.roy93group.libresudoku.data.database.dao.FolderDao
-import com.roy93group.libresudoku.data.database.dao.RecordDao
-import com.roy93group.libresudoku.data.database.dao.SavedGameDao
-import com.roy93group.libresudoku.data.database.model.Folder
-import com.roy93group.libresudoku.data.database.model.Record
-import com.roy93group.libresudoku.data.database.model.SavedGame
-import com.roy93group.libresudoku.data.database.model.SudokuBoard
+import com.roy93group.libresudoku.data.db.converters.DurationConverter
+import com.roy93group.libresudoku.data.db.converters.GameDifficultyConverter
+import com.roy93group.libresudoku.data.db.converters.GameTypeConverter
+import com.roy93group.libresudoku.data.db.converters.ZonedDateTimeConverter
+import com.roy93group.libresudoku.data.db.dao.BoardDao
+import com.roy93group.libresudoku.data.db.dao.FolderDao
+import com.roy93group.libresudoku.data.db.dao.RecordDao
+import com.roy93group.libresudoku.data.db.dao.SavedGameDao
+import com.roy93group.libresudoku.data.db.model.Folder
+import com.roy93group.libresudoku.data.db.model.Record
+import com.roy93group.libresudoku.data.db.model.SavedGame
+import com.roy93group.libresudoku.data.db.model.SudokuBoard
 
 @Database(
     entities = [

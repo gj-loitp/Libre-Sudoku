@@ -1,8 +1,8 @@
-package com.roy93group.libresudoku.data.database.repository
+package com.roy93group.libresudoku.data.db.repository
 
-import com.roy93group.libresudoku.data.database.dao.FolderDao
-import com.roy93group.libresudoku.data.database.model.Folder
-import com.roy93group.libresudoku.data.database.model.SavedGame
+import com.roy93group.libresudoku.data.db.dao.FolderDao
+import com.roy93group.libresudoku.data.db.model.Folder
+import com.roy93group.libresudoku.data.db.model.SavedGame
 import com.roy93group.libresudoku.domain.repository.FolderRepository
 import kotlinx.coroutines.flow.Flow
 

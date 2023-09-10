@@ -11,7 +11,7 @@ import com.roy93group.libresudoku.core.qqwing.GameDifficulty
 import com.roy93group.libresudoku.core.qqwing.GameType
 import com.roy93group.libresudoku.core.qqwing.QQWingController
 import com.roy93group.libresudoku.core.utils.SudokuParser
-import com.roy93group.libresudoku.data.database.model.SudokuBoard
+import com.roy93group.libresudoku.data.db.model.SudokuBoard
 import com.roy93group.libresudoku.data.datastore.AppSettingsManager
 import com.roy93group.libresudoku.domain.repository.BoardRepository
 import com.roy93group.libresudoku.domain.repository.SavedGameRepository

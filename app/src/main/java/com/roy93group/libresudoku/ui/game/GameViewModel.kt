@@ -19,9 +19,9 @@ import com.roy93group.libresudoku.core.utils.SudokuParser
 import com.roy93group.libresudoku.core.utils.SudokuUtils
 import com.roy93group.libresudoku.core.utils.UndoRedoManager
 import com.roy93group.libresudoku.core.utils.toFormattedString
-import com.roy93group.libresudoku.data.database.model.Record
-import com.roy93group.libresudoku.data.database.model.SavedGame
-import com.roy93group.libresudoku.data.database.model.SudokuBoard
+import com.roy93group.libresudoku.data.db.model.Record
+import com.roy93group.libresudoku.data.db.model.SavedGame
+import com.roy93group.libresudoku.data.db.model.SudokuBoard
 import com.roy93group.libresudoku.data.datastore.AppSettingsManager
 import com.roy93group.libresudoku.data.datastore.ThemeSettingsManager
 import com.roy93group.libresudoku.domain.repository.RecordRepository

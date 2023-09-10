@@ -1,9 +1,9 @@
-package com.roy93group.libresudoku.data.database.repository
+package com.roy93group.libresudoku.data.db.repository
 
 import com.roy93group.libresudoku.core.qqwing.GameDifficulty
-import com.roy93group.libresudoku.data.database.dao.BoardDao
-import com.roy93group.libresudoku.data.database.model.SavedGame
-import com.roy93group.libresudoku.data.database.model.SudokuBoard
+import com.roy93group.libresudoku.data.db.dao.BoardDao
+import com.roy93group.libresudoku.data.db.model.SavedGame
+import com.roy93group.libresudoku.data.db.model.SudokuBoard
 import com.roy93group.libresudoku.domain.repository.BoardRepository
 import kotlinx.coroutines.flow.Flow
 

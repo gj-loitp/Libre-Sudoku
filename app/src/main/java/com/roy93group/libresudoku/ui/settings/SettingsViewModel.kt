@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.roy93group.libresudoku.data.database.AppDatabase
+import com.roy93group.libresudoku.data.db.AppDatabase
 import com.roy93group.libresudoku.data.datastore.AcraSharedPrefs
 import com.roy93group.libresudoku.data.datastore.AppSettingsManager
 import com.roy93group.libresudoku.data.datastore.ThemeSettingsManager

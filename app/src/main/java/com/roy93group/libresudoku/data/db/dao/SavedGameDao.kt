@@ -1,8 +1,8 @@
-package com.roy93group.libresudoku.data.database.dao
+package com.roy93group.libresudoku.data.db.dao
 
 import androidx.room.*
-import com.roy93group.libresudoku.data.database.model.SavedGame
-import com.roy93group.libresudoku.data.database.model.SudokuBoard
+import com.roy93group.libresudoku.data.db.model.SavedGame
+import com.roy93group.libresudoku.data.db.model.SudokuBoard
 import kotlinx.coroutines.flow.Flow
 
 @Dao

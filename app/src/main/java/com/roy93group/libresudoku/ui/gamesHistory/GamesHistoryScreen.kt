@@ -54,8 +54,8 @@ import com.roy93group.libresudoku.R
 import com.roy93group.libresudoku.core.qqwing.GameDifficulty
 import com.roy93group.libresudoku.core.qqwing.GameType
 import com.roy93group.libresudoku.core.utils.toFormattedString
-import com.roy93group.libresudoku.data.database.model.SavedGame
-import com.roy93group.libresudoku.data.database.model.SudokuBoard
+import com.roy93group.libresudoku.data.db.model.SavedGame
+import com.roy93group.libresudoku.data.db.model.SudokuBoard
 import com.roy93group.libresudoku.data.datastore.AppSettingsManager
 import com.roy93group.libresudoku.ui.components.AnimatedIconFilterChip
 import com.roy93group.libresudoku.ui.components.EmptyScreen

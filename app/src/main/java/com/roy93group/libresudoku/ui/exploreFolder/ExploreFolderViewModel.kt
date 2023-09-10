@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.roy93group.libresudoku.core.qqwing.QQWingController
 import com.roy93group.libresudoku.core.utils.SudokuParser
-import com.roy93group.libresudoku.data.database.model.SudokuBoard
+import com.roy93group.libresudoku.data.db.model.SudokuBoard
 import com.roy93group.libresudoku.domain.usecase.UpdateManyBoardsUseCase
 import com.roy93group.libresudoku.domain.usecase.board.DeleteBoardUseCase
 import com.roy93group.libresudoku.domain.usecase.board.DeleteBoardsUseCase

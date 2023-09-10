@@ -1,7 +1,7 @@
 package com.roy93group.libresudoku.core.parser
 
 import android.util.Log
-import com.roy93group.libresudoku.data.database.model.SudokuBoard
+import com.roy93group.libresudoku.data.db.model.SudokuBoard
 
 /**
  * .sdm - is a very simple format.

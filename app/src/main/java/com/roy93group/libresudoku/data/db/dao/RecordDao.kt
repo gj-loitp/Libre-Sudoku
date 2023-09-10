@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.data.database.dao
+package com.roy93group.libresudoku.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.roy93group.libresudoku.core.qqwing.GameDifficulty
 import com.roy93group.libresudoku.core.qqwing.GameType
-import com.roy93group.libresudoku.data.database.model.Record
+import com.roy93group.libresudoku.data.db.model.Record
 import kotlinx.coroutines.flow.Flow
 
 @Dao

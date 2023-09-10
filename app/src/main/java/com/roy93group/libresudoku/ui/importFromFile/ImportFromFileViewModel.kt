@@ -14,8 +14,8 @@ import com.roy93group.libresudoku.core.parser.OpenSudokuParser
 import com.roy93group.libresudoku.core.parser.SdmParser
 import com.roy93group.libresudoku.core.qqwing.GameDifficulty
 import com.roy93group.libresudoku.core.qqwing.GameType
-import com.roy93group.libresudoku.data.database.model.Folder
-import com.roy93group.libresudoku.data.database.model.SudokuBoard
+import com.roy93group.libresudoku.data.db.model.Folder
+import com.roy93group.libresudoku.data.db.model.SudokuBoard
 import com.roy93group.libresudoku.domain.repository.BoardRepository
 import com.roy93group.libresudoku.domain.usecase.folder.InsertFolderUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

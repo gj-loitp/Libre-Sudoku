@@ -1,12 +1,12 @@
-package com.roy93group.libresudoku.data.database.dao
+package com.roy93group.libresudoku.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.roy93group.libresudoku.data.database.model.Folder
-import com.roy93group.libresudoku.data.database.model.SavedGame
+import com.roy93group.libresudoku.data.db.model.Folder
+import com.roy93group.libresudoku.data.db.model.SavedGame
 import kotlinx.coroutines.flow.Flow
 
 @Dao

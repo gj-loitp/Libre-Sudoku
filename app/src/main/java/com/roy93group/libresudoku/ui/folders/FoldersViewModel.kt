@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.roy93group.libresudoku.core.parser.SdmParser
-import com.roy93group.libresudoku.data.database.model.Folder
+import com.roy93group.libresudoku.data.db.model.Folder
 import com.roy93group.libresudoku.domain.usecase.board.GetGamesInFolderUseCase
 import com.roy93group.libresudoku.domain.usecase.folder.CountPuzzlesFolderUseCase
 import com.roy93group.libresudoku.domain.usecase.folder.DeleteFolderUseCase

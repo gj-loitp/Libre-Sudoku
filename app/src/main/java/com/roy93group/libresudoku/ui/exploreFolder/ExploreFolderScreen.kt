@@ -93,9 +93,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.roy93group.libresudoku.LocalBoardColors
 import com.roy93group.libresudoku.R
 import com.roy93group.libresudoku.core.utils.toFormattedString
-import com.roy93group.libresudoku.data.database.model.Folder
-import com.roy93group.libresudoku.data.database.model.SavedGame
-import com.roy93group.libresudoku.data.database.model.SudokuBoard
+import com.roy93group.libresudoku.data.db.model.Folder
+import com.roy93group.libresudoku.data.db.model.SavedGame
+import com.roy93group.libresudoku.data.db.model.SudokuBoard
 import com.roy93group.libresudoku.ui.components.EmptyScreen
 import com.roy93group.libresudoku.ui.components.ScrollbarLazyColumn
 import com.roy93group.libresudoku.ui.components.board.BoardPreview

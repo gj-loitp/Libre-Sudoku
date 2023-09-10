@@ -13,13 +13,16 @@ class AcraSharedPrefs @Inject constructor(
 ) {
     private val acraEnabledKey = ACRA.PREF_ENABLE_ACRA
 
-    private var prefs = context.getSharedPreferences(ACRA_SHARED_PREFS_NAME, Context.MODE_PRIVATE)
+    private var prefs = context.getSharedPreferences(
+        /* p0 = */ ACRA_SHARED_PREFS_NAME,
+        /* p1 = */Context.MODE_PRIVATE
+    )
 
-    fun getAcraEnabled(): Boolean = prefs.getBoolean(acraEnabledKey, true)
+    fun getAcraEnabled(): Boolean = prefs.getBoolean(/* p0 = */ acraEnabledKey, /* p1 = */ true)
 
     fun setAcraEnabled(enabled: Boolean) {
         with(prefs.edit()) {
-            putBoolean(acraEnabledKey, enabled)
+            putBoolean(/* p0 = */ acraEnabledKey, /* p1 = */ enabled)
             apply()
         }
     }

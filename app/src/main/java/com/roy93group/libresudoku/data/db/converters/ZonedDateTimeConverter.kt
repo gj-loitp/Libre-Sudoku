@@ -1,4 +1,4 @@
-package com.roy93group.libresudoku.data.database.converters
+package com.roy93group.libresudoku.data.db.converters
 
 import androidx.room.TypeConverter
 import java.time.Instant
