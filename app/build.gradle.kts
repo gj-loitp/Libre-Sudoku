@@ -27,16 +27,6 @@ android {
             arg("room.schemaLocation", "$projectDir/schemas")
         }
     }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -56,6 +46,51 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            )
+        }
+    }
+    buildTypes.all { isCrunchPngs = false }
+
+    flavorDimensions.add("type")
+
+    productFlavors {
+        create("dev") {
+            setDimension("type")
+//            buildConfigField("String", "FLAVOR_buildEnv", "dev")
+
+            resValue ("string", "app_name", "Sudoku in the Universe DEV")
+
+            resValue("string", "SDK_KEY", "e75FnQfS9XTTqM1Kne69U7PW_MBgAnGQTFvtwVVui6kRPKs5L7ws9twr5IQWwVfzPKZ5pF2IfDa7lguMgGlCyt")
+            resValue("string", "BANNER", "")
+            resValue("string", "INTER", "")
+
+            resValue("string", "EnableAdInter", "true")
+            resValue("string", "EnableAdBanner", "true")
+        }
+        create("production") {
+            setDimension("type")
+//            buildConfigField("String", "FLAVOR_buildEnv", "prod")
+
+            resValue ("string", "app_name", "Sudoku in the Universe")
+
+            resValue("string", "SDK_KEY", "e75FnQfS9XTTqM1Kne69U7PW_MBgAnGQTFvtwVVui6kRPKs5L7ws9twr5IQWwVfzPKZ5pF2IfDa7lguMgGlCyt")
+            resValue("string", "BANNER", "")
+            resValue("string", "INTER", "")
+
+            resValue("string", "EnableAdInter", "true")
+            resValue("string", "EnableAdBanner", "true")
+        }
+    }
+    android.buildFeatures.dataBinding = true
 }
 
 aboutLibraries {

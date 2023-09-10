@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.roy93group.libresudoku.BuildConfig
 import com.roy93group.libresudoku.R
@@ -72,6 +73,7 @@ fun AboutScreen(
                     contentDescription = null,
                 )
                 Text(
+                    textAlign = TextAlign.Center,
                     text = stringResource(R.string.app_name),
                     style = MaterialTheme.typography.titleLarge
                 )
