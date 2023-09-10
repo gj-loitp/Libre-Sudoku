@@ -89,4 +89,5 @@ dependencies {
     implementation(libs.acra.dialog)
     implementation(libs.acra.mail)
     implementation(libs.aboutLibraries)
+    debugImplementation(libs.leakcanary.android)
 }

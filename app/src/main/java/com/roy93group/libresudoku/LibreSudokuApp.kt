@@ -11,6 +11,18 @@ import org.acra.data.StringFormat
 import org.acra.ktx.initAcra
 import java.time.LocalDate
 
+//TODO firebase
+//TODO ad
+
+//ic_launcher
+//policy
+//rate app, more app, share app
+//keystore
+
+//done
+//leak canary
+//permission ad id
+
 @HiltAndroidApp
 class LibreSudokuApp : Application() {
     override fun attachBaseContext(base: Context?) {
