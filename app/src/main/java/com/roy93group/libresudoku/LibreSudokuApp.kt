@@ -14,7 +14,6 @@ import java.time.LocalDate
 //TODO firebase
 //TODO ad
 
-//ic_launcher
 //policy
 //rate app, more app, share app
 //keystore
@@ -22,6 +21,7 @@ import java.time.LocalDate
 //done
 //leak canary
 //permission ad id
+//ic_launcher
 
 @HiltAndroidApp
 class LibreSudokuApp : Application() {
