@@ -1,6 +1,7 @@
 package com.roy93group.libresudoku.ui.more.about
 
 import android.app.Activity
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -26,6 +27,7 @@ import com.roy93group.libresudoku.BuildConfig
 import com.roy93group.libresudoku.R
 import com.roy93group.libresudoku.ext.moreApp
 import com.roy93group.libresudoku.ext.openBrowserPolicy
+import com.roy93group.libresudoku.ext.openUrlInBrowser
 import com.roy93group.libresudoku.ext.rateApp
 import com.roy93group.libresudoku.ext.shareApp
 import com.roy93group.libresudoku.ui.components.PreferenceRow
@@ -110,6 +112,21 @@ fun AboutScreen(
                 painter = painterResource(R.drawable.ic_github_24dp),
                 onClick = {
                     activity.openBrowserPolicy()
+                }
+            )
+            PreferenceRow(
+                title = stringResource(R.string.about_github_project),
+                painter = painterResource(R.drawable.ic_github_24dp),
+                onClick = {
+                    if (BuildConfig.DEBUG) {
+                        activity.openUrlInBrowser("https://github.com/tplloi/Libre-Sudoku/tree/dev")
+                    } else {
+                        Toast.makeText(
+                            activity,
+                            "This feature is only available in Debug mode.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             )
 
