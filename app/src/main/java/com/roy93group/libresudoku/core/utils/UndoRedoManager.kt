@@ -1,5 +1,6 @@
 package com.roy93group.libresudoku.core.utils
 
+import androidx.annotation.Keep
 import com.roy93group.libresudoku.core.Cell
 import com.roy93group.libresudoku.core.Note
 
@@ -52,7 +53,8 @@ class UndoRedoManager(private val initialState: GameState) {
     fun clear() = states.clear()
 }
 
+@Keep
 data class GameState(
     val board: List<List<Cell>>,
-    val notes: List<Note>
+    val notes: List<Note>,
 )

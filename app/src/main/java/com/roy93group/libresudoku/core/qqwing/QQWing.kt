@@ -1,6 +1,7 @@
 package com.roy93group.libresudoku.core.qqwing
 
 import java.util.*
+import kotlin.math.abs
 
 // @formatter:off
 /*
@@ -174,10 +175,10 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
                 mark(position, round, value)
                 if (logHistory || recordHistory) addHistoryItem(
                     LogItem(
-                        round,
-                        LogType.GIVEN,
-                        value,
-                        position
+                        r = round,
+                        t = LogType.GIVEN,
+                        v = value,
+                        p = position
                     )
                 )
             }
@@ -221,8 +222,8 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
      * Get the number of cells for which the solution was determined because
      * there was only one possible value for that cell.
      */
-    fun getSingleCount(): Int {
-        return getLogCount(solveInstructions, LogType.SINGLE)
+    private fun getSingleCount(): Int {
+        return getLogCount(v = solveInstructions, type = LogType.SINGLE)
     }
 
     /**
@@ -230,9 +231,12 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
      * that cell had the only possibility for some value in the row, column, or
      * section.
      */
-    fun getHiddenSingleCount(): Int {
-        return getLogCount(solveInstructions, LogType.HIDDEN_SINGLE_ROW) +
-                getLogCount(solveInstructions, LogType.HIDDEN_SINGLE_COLUMN) + getLogCount(
+    private fun getHiddenSingleCount(): Int {
+        return getLogCount(v = solveInstructions, type = LogType.HIDDEN_SINGLE_ROW) +
+                getLogCount(
+                    v = solveInstructions,
+                    type = LogType.HIDDEN_SINGLE_COLUMN
+                ) + getLogCount(
             solveInstructions,
             LogType.HIDDEN_SINGLE_SECTION
         )
@@ -242,9 +246,9 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
      * Get the number of naked pair reductions that were performed in solving
      * this puzzle.
      */
-    fun getNakedPairCount(): Int {
-        return getLogCount(solveInstructions, LogType.NAKED_PAIR_ROW) +
-                getLogCount(solveInstructions, LogType.NAKED_PAIR_COLUMN) + getLogCount(
+    private fun getNakedPairCount(): Int {
+        return getLogCount(v = solveInstructions, type = LogType.NAKED_PAIR_ROW) +
+                getLogCount(v = solveInstructions, type = LogType.NAKED_PAIR_COLUMN) + getLogCount(
             solveInstructions,
             LogType.NAKED_PAIR_SECTION
         )
@@ -254,7 +258,7 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
      * Get the number of hidden pair reductions that were performed in solving
      * this puzzle.
      */
-    fun getHiddenPairCount(): Int {
+    private fun getHiddenPairCount(): Int {
         return getLogCount(solveInstructions, LogType.HIDDEN_PAIR_ROW) +
                 getLogCount(solveInstructions, LogType.HIDDEN_PAIR_COLUMN) + getLogCount(
             solveInstructions,
@@ -266,7 +270,7 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
      * Get the number of pointing pair/triple reductions that were performed in
      * solving this puzzle.
      */
-    fun getPointingPairTripleCount(): Int {
+    private fun getPointingPairTripleCount(): Int {
         return getLogCount(solveInstructions, LogType.POINTING_PAIR_TRIPLE_ROW) + getLogCount(
             solveInstructions,
             LogType.POINTING_PAIR_TRIPLE_COLUMN
@@ -277,7 +281,7 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
      * Get the number of box/line reductions that were performed in solving this
      * puzzle.
      */
-    fun getBoxLineReductionCount(): Int {
+    private fun getBoxLineReductionCount(): Int {
         return getLogCount(solveInstructions, LogType.ROW_BOX) + getLogCount(
             solveInstructions,
             LogType.COLUMN_BOX
@@ -287,7 +291,7 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
     /**
      * Get the number lucky guesses in solving this puzzle.
      */
-    fun getGuessCount(): Int {
+    private fun getGuessCount(): Int {
         return getLogCount(solveInstructions, LogType.GUESS)
     }
 
@@ -300,8 +304,8 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
     }
 
     private fun shuffleRandomArrays() {
-        shuffleArray(randomBoardArray, BOARD_SIZE)
-        shuffleArray(randomPossibilityArray, ROW_COL_SEC_SIZE)
+        shuffleArray(array = randomBoardArray, size = BOARD_SIZE)
+        shuffleArray(array = randomPossibilityArray, size = ROW_COL_SEC_SIZE)
     }
 
     private fun clearPuzzle() {
@@ -368,32 +372,32 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
                 when (symmetry) {
                     Symmetry.ROTATE90 -> {
                         positionsym2 = rowColumnToCell(
-                            ROW_COL_SEC_SIZE - 1 - cellToColumn(position),
-                            cellToRow(position)
+                            row = ROW_COL_SEC_SIZE - 1 - cellToColumn(position),
+                            column = cellToRow(position)
                         )
                         positionsym3 = rowColumnToCell(
-                            cellToColumn(position),
-                            ROW_COL_SEC_SIZE - 1 - cellToRow(position)
+                            row = cellToColumn(cell = position),
+                            column = ROW_COL_SEC_SIZE - 1 - cellToRow(position)
                         )
                         positionsym1 = rowColumnToCell(
-                            ROW_COL_SEC_SIZE - 1 - cellToRow(position),
-                            ROW_COL_SEC_SIZE - 1 - cellToColumn(position)
+                            row = ROW_COL_SEC_SIZE - 1 - cellToRow(position),
+                            column = ROW_COL_SEC_SIZE - 1 - cellToColumn(position)
                         )
                     }
 
                     Symmetry.ROTATE180 -> positionsym1 = rowColumnToCell(
-                        ROW_COL_SEC_SIZE - 1 - cellToRow(position),
-                        ROW_COL_SEC_SIZE - 1 - cellToColumn(position)
+                        row = ROW_COL_SEC_SIZE - 1 - cellToRow(position),
+                        column = ROW_COL_SEC_SIZE - 1 - cellToColumn(position)
                     )
 
                     Symmetry.MIRROR -> positionsym1 = rowColumnToCell(
-                        cellToRow(position),
-                        ROW_COL_SEC_SIZE - 1 - cellToColumn(position)
+                        row = cellToRow(cell = position),
+                        column = ROW_COL_SEC_SIZE - 1 - cellToColumn(position)
                     )
 
                     Symmetry.FLIP -> positionsym1 = rowColumnToCell(
-                        ROW_COL_SEC_SIZE - 1 - cellToRow(position),
-                        cellToColumn(position)
+                        row = ROW_COL_SEC_SIZE - 1 - cellToRow(position),
+                        column = cellToColumn(position)
                     )
 
                     else -> {}
@@ -469,7 +473,7 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
             solveHistory.add(l) // ->push_back(l);
             solveInstructions.add(l) // ->push_back(l);
         } else {
-            l = null
+            //do nothing
         }
     }
 
@@ -508,7 +512,7 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
         print(getSolveInstructionsString())
     }
 
-    fun getSolveInstructionsString(): String {
+    private fun getSolveInstructionsString(): String {
         return if (isSolved()) {
             historyToString(solveInstructions)
         } else {
@@ -651,7 +655,7 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
         }
     }
 
-    fun isSolved(): Boolean {
+    private fun isSolved(): Boolean {
         for (i in 0 until BOARD_SIZE) {
             if (solution[i] == 0) {
                 return false
@@ -973,7 +977,7 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
     private fun removePossibilitiesInOneFromTwo(
         position1: Int,
         position2: Int,
-        round: Int
+        round: Int,
     ): Boolean {
         var doneSomething = false
         for (valIndex in 0 until ROW_COL_SEC_SIZE) {
@@ -1635,7 +1639,7 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
         private fun shuffleArray(array: IntArray, size: Int) {
             for (i in 0 until size) {
                 val tailSize = size - i
-                val randTailPos = Math.abs(random.nextInt()) % tailSize + i
+                val randTailPos = abs(random.nextInt()) % tailSize + i
                 val temp = array[i]
                 array[i] = array[randTailPos]
                 array[randTailPos] = temp
@@ -1647,7 +1651,7 @@ class QQWing(type: GameType, difficulty: GameDifficulty) {
             get() {
                 val values = Symmetry.values()
                 // not the first and last value which are NONE and RANDOM
-                return values[Math.abs(random.nextInt()) % (values.size - 1) + 1]
+                return values[abs(random.nextInt()) % (values.size - 1) + 1]
             }
 
         /**

@@ -9,21 +9,21 @@ import com.roy93group.libresudoku.core.qqwing.GameType
 class SudokuUtils {
 
     // returns range of row indexes in region of give cell
-    fun getBoxRowRange(cell: Cell, sectionHeight: Int): IntRange {
+    private fun getBoxRowRange(cell: Cell, sectionHeight: Int): IntRange {
         return cell.row - cell.row % sectionHeight until (cell.row - cell.row % sectionHeight) + sectionHeight
     }
 
     // returns range of col indexes in region of give cell
-    fun getBoxColRange(cell: Cell, sectionWidth: Int): IntRange {
+    private fun getBoxColRange(cell: Cell, sectionWidth: Int): IntRange {
         return cell.col - cell.col % sectionWidth until (cell.col - cell.col % sectionWidth) + sectionWidth
     }
 
 
     // returns candidates for given cell
-    fun getCandidates(
+    private fun getCandidates(
         board: List<List<Cell>>,
         cell: Cell,
-        type: GameType
+        type: GameType,
     ): List<Int> {
         var candidates = List(type.size) { index -> index + 1 }
 
@@ -51,7 +51,7 @@ class SudokuUtils {
     fun isValidCellDynamic(
         board: List<List<Cell>>,
         cell: Cell,
-        type: GameType
+        type: GameType,
     ): Boolean {
         val sudokuUtils = SudokuUtils()
         for (i in sudokuUtils.getBoxRowRange(cell, type.sectionHeight)) {
@@ -93,8 +93,8 @@ class SudokuUtils {
         board.forEach { cells ->
             cells.forEach { cell ->
                 if (cell.value == 0) {
-                    getCandidates(board, cell, type).forEach {
-                        notes = notes.plus(Note(cell.row, cell.col, it))
+                    getCandidates(board = board, cell = cell, type = type).forEach {
+                        notes = notes.plus(Note(row = cell.row, col = cell.col, value = it))
                     }
                 }
             }
@@ -106,23 +106,44 @@ class SudokuUtils {
         board: List<List<Cell>>,
         notes: List<Note>,
         cell: Cell,
-        type: GameType
+        type: GameType,
     ): List<Note> {
         var newNotes = notes
 
         for (i in getBoxRowRange(cell, type.sectionHeight)) {
             for (j in getBoxColRange(cell, type.sectionWidth)) {
-                if (board[i][j].value == 0 && newNotes.contains(Note(i, j, cell.value))) {
-                    newNotes = newNotes.minus(Note(i, j, cell.value))
+                if (board[i][j].value == 0 && newNotes.contains(
+                        Note(
+                            row = i,
+                            col = j,
+                            value = cell.value
+                        )
+                    )
+                ) {
+                    newNotes = newNotes.minus(Note(row = i, col = j, value = cell.value))
                 }
             }
         }
         for (i in 0 until type.size) {
-            if (board[i][cell.col].value == 0 && newNotes.contains(Note(i, cell.col, cell.value))) {
-                newNotes = newNotes.minus(Note(i, cell.col, cell.value))
+            if (board[i][cell.col].value == 0 && newNotes.contains(
+                    Note(
+                        row = i,
+                        col = cell.col,
+                        value = cell.value
+                    )
+                )
+            ) {
+                newNotes = newNotes.minus(Note(row = i, col = cell.col, value = cell.value))
             }
-            if (board[cell.row][i].value == 0 && newNotes.contains(Note(cell.row, i, cell.value))) {
-                newNotes = newNotes.minus(Note(cell.row, i, cell.value))
+            if (board[cell.row][i].value == 0 && newNotes.contains(
+                    Note(
+                        row = cell.row,
+                        col = i,
+                        value = cell.value
+                    )
+                )
+            ) {
+                newNotes = newNotes.minus(Note(row = cell.row, col = i, value = cell.value))
             }
         }
         return newNotes

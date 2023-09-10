@@ -6,7 +6,6 @@ import org.xmlpull.v1.XmlPullParserException
 import org.xmlpull.v1.XmlPullParserFactory
 import java.io.IOException
 
-
 // File type from OpenSudoku app (https://gitlab.com/opensudoku/opensudoku)
 // https://gitlab.com/opensudoku/opensudoku/-/blob/develop/app/src/main/java/org/moire/opensudoku/gui/importing/OpenSudokuImportTask.java
 /**
@@ -59,7 +58,7 @@ class OpenSudokuParser : FileImportParser {
     private fun importV1(parser: XmlPullParser): Pair<Boolean, List<String>> {
         val boards = mutableListOf<String>()
         var eventType = parser.eventType
-        var lastTag = ""
+        var lastTag: String
         while (eventType != XmlPullParser.END_DOCUMENT) {
             if (eventType == XmlPullParser.START_TAG) {
                 lastTag = parser.name
@@ -81,7 +80,7 @@ class OpenSudokuParser : FileImportParser {
 
     private fun importV2(parser: XmlPullParser): Pair<Boolean, List<String>> {
         var eventType = parser.eventType
-        var lastTag = ""
+        var lastTag: String
         //var folderName: String? = null
         val boards = mutableListOf<String>()
         while (eventType != XmlPullParser.END_DOCUMENT) {

@@ -32,7 +32,7 @@ class QQWingController {
     fun generateMultiple(
         type: GameType,
         difficulty: GameDifficulty,
-        amount: Int
+        amount: Int,
     ): LinkedList<IntArray> {
         generated.clear()
         options.numberToGenerate = amount
@@ -58,7 +58,7 @@ class QQWingController {
     fun generateFromSeed(
         seed: Int,
         challengePermission: Double = 1.0,
-        challengeIterations: Int = 1
+        challengeIterations: Int = 1,
     ): IntArray {
         var seed = seed
         var challengeIterations = challengeIterations
@@ -145,7 +145,6 @@ class QQWingController {
                                         havePuzzle = false
                                         done.set(true)
                                     }
-                                    puzzle = null
                                 }
 
                                 if (havePuzzle) {

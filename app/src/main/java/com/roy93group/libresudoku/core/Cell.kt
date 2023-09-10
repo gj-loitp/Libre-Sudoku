@@ -1,5 +1,8 @@
 package com.roy93group.libresudoku.core
 
+import androidx.annotation.Keep
+
+@Keep
 data class Cell(
     val row: Int,
     val col: Int,

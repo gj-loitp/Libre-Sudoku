@@ -1,5 +1,6 @@
 package com.roy93group.libresudoku.core.utils
 
+import androidx.annotation.Keep
 import com.roy93group.libresudoku.core.Cell
 import com.roy93group.libresudoku.core.Note
 import com.roy93group.libresudoku.core.qqwing.GameType
@@ -11,7 +12,7 @@ class SudokuParser {
         board: String,
         gameType: GameType,
         locked: Boolean = false,
-        emptySeparator: Char? = null
+        emptySeparator: Char? = null,
     ): MutableList<MutableList<Cell>> {
         if (board.isEmpty()) {
             throw BoardParseException(message = "Input string was empty")
@@ -20,7 +21,7 @@ class SudokuParser {
         val size = gameType.size
         val listBoard = MutableList(size) { row ->
             MutableList(size) { col ->
-                Cell(row, col, 0)
+                Cell(row = row, col = col, value = 0)
             }
         }
 
@@ -64,7 +65,7 @@ class SudokuParser {
     fun boardToString(board: IntArray, emptySeparator: Char = '0'): String {
         var boardString = ""
         board.forEach {
-            boardString += if(it != 0) it.toString(radix) else emptySeparator
+            boardString += if (it != 0) it.toString(radix) else emptySeparator
         }
         return boardString
     }
@@ -79,7 +80,7 @@ class SudokuParser {
             val row = boardDigitToInt(toParse[0])
             val col = boardDigitToInt(toParse[2])
             val value = boardDigitToInt(toParse[4])
-            notes.add(Note(row, col, value))
+            notes.add(Note(row = row, col = col, value = value))
             i += index - i + 1
         }
         return notes
@@ -101,4 +102,5 @@ class SudokuParser {
     }
 }
 
+@Keep
 class BoardParseException(message: String) : Exception(message)

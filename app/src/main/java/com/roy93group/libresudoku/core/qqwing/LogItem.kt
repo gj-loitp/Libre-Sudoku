@@ -54,8 +54,7 @@ class LogItem {
     /**
      * position on the board at which the value (if any) was set.
      */
-    var position = 0
-        private set
+    private var position = 0
 
     constructor(r: Int, t: LogType) {
         init(r, t, 0, -1)
@@ -99,7 +98,7 @@ class LogItem {
      * Print the current log item. The message used is determined by the type of
      * log item.
      */
-    val description: String
+    private val description: String
         get() {
             val sb = StringBuilder()
             sb.append("Round: ").append(round)
