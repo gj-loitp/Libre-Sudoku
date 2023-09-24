@@ -72,7 +72,13 @@ fun HomeScreen(
         Text(
             text = stringResource(R.string.app_name),
             style = MaterialTheme.typography.headlineLarge,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+//            modifier = Modifier.padding(
+//                start = 0.dp,
+//                bottom = 0.dp,
+//                top = 0.dp,
+//                end = 0.dp,
+//            )
         )
         Column(
             horizontalAlignment = Alignment.CenterHorizontally

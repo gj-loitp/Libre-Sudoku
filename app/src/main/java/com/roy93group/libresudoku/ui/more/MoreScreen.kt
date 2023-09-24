@@ -43,7 +43,13 @@ fun MoreScreen(
             Text(
                 text = stringResource(R.string.app_name),
                 style = MaterialTheme.typography.headlineLarge,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+//                modifier = Modifier.padding(
+//                    start = 16.dp,
+//                    bottom = 8.dp,
+//                    top = 8.dp,
+//                    end = 16.dp,
+//                )
             )
         }
 
