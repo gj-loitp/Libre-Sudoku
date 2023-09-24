@@ -85,22 +85,22 @@ fun MoreScreen(
         )
         PreferenceRow(
             title = "Github (the original)",
-            painter = painterResource(R.drawable.ic_outline_info_24),
+            painter = painterResource(R.drawable.baseline_code_24),
             onClick = navigateGithubOriginal
         )
         PreferenceRow(
             title = "Developer",
-            painter = painterResource(R.drawable.ic_outline_info_24),
+            painter = painterResource(R.drawable.baseline_logo_dev_24),
             onClick = navigateDeveloper
         )
         PreferenceRow(
             title = "Current project source code",
-            painter = painterResource(R.drawable.ic_outline_info_24),
+            painter = painterResource(R.drawable.baseline_code_24),
             onClick = navigateGithubCurrent
         )
         PreferenceRow(
             title = "License",
-            painter = painterResource(R.drawable.ic_outline_info_24),
+            painter = painterResource(R.drawable.baseline_local_police_24),
             onClick = navigateLicense
         )
     }
