@@ -11,8 +11,8 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 20230903,
-      "versionName": "2023.09.03",
+      "versionCode": 20230923,
+      "versionName": "2023.09.23",
       "outputFile": "app-production-release.apk"
     }
   ],
