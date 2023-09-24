@@ -120,15 +120,7 @@ fun AboutScreen(
                 title = stringResource(R.string.about_github_project),
                 painter = painterResource(R.drawable.ic_github_24dp),
                 onClick = {
-                    if (BuildConfig.DEBUG) {
-                        activity.openUrlInBrowser("https://github.com/tplloi/Libre-Sudoku/tree/dev")
-                    } else {
-                        Toast.makeText(
-                            activity,
-                            "This feature is only available in Debug mode.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
+                    activity.openUrlInBrowser("https://github.com/tplloi/Libre-Sudoku/tree/dev")
                 }
             )
 

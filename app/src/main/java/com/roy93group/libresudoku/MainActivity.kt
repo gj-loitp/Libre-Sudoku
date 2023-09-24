@@ -46,6 +46,7 @@ import androidx.navigation.navOptions
 import com.roy93group.libresudoku.core.PreferencesConstants
 import com.roy93group.libresudoku.data.datastore.AppSettingsManager
 import com.roy93group.libresudoku.data.datastore.ThemeSettingsManager
+import com.roy93group.libresudoku.ext.openUrlInBrowser
 import com.roy93group.libresudoku.ui.components.animatedComposable
 import com.roy93group.libresudoku.ui.createEditSudoku.CreateSudokuScreen
 import com.roy93group.libresudoku.ui.exploreFolder.ExploreFolderScreen
@@ -196,7 +197,19 @@ class MainActivity : AppCompatActivity() {
                                     navigateSettings = { navController.navigate("settings/?fromGame=false") },
                                     navigateLearn = { navController.navigate(Route.LEARN) },
                                     navigateAbout = { navController.navigate(Route.ABOUT) },
-                                    navigateImport = { navController.navigate(Route.FOLDERS) }
+                                    navigateImport = { navController.navigate(Route.FOLDERS) },
+                                    navigateGithubOriginal = {
+                                        openUrlInBrowser("https://github.com/kaajjo/Libre-Sudoku")
+                                    },
+                                    navigateDeveloper = {
+                                        openUrlInBrowser("https://github.com/kaajjo")
+                                    },
+                                    navigateGithubCurrent = {
+                                        openUrlInBrowser("https://github.com/gj-loitp/Libre-Sudoku")
+                                    },
+                                    navigateLicense = {
+                                        openUrlInBrowser("https://raw.githubusercontent.com/kaajjo/Libre-Sudoku/main/LICENSE")
+                                    }
                                 )
                             }
 

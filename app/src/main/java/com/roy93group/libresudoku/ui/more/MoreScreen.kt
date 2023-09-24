@@ -28,6 +28,10 @@ fun MoreScreen(
     navigateLearn: () -> Unit,
     navigateAbout: () -> Unit,
     navigateImport: () -> Unit,
+    navigateGithubOriginal: () -> Unit,
+    navigateDeveloper: () -> Unit,
+    navigateGithubCurrent: () -> Unit,
+    navigateLicense: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -78,6 +82,26 @@ fun MoreScreen(
             title = stringResource(R.string.about_title),
             painter = painterResource(R.drawable.ic_outline_info_24),
             onClick = navigateAbout
+        )
+        PreferenceRow(
+            title = "Github (the original)",
+            painter = painterResource(R.drawable.ic_outline_info_24),
+            onClick = navigateGithubOriginal
+        )
+        PreferenceRow(
+            title = "Developer",
+            painter = painterResource(R.drawable.ic_outline_info_24),
+            onClick = navigateDeveloper
+        )
+        PreferenceRow(
+            title = "Current project source code",
+            painter = painterResource(R.drawable.ic_outline_info_24),
+            onClick = navigateGithubCurrent
+        )
+        PreferenceRow(
+            title = "License",
+            painter = painterResource(R.drawable.ic_outline_info_24),
+            onClick = navigateLicense
         )
     }
 }
