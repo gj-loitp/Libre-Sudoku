@@ -15,8 +15,8 @@ android {
         applicationId = "com.roy93group.libresudoku"
         minSdk = 26
         targetSdk = 34
-        versionCode = 20230923
-        versionName = "2023.09.23"
+        versionCode = 20240101
+        versionName = "2024.01.01"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -64,8 +64,8 @@ android {
 
     productFlavors {
         create("dev") {
-            setDimension("type")
-//            buildConfigField("String", "FLAVOR_buildEnv", "dev")
+            dimension = "type"
+            //            buildConfigField("String", "FLAVOR_buildEnv", "dev")
 
             resValue ("string", "app_name", "Sudoku in the Universe DEV")
 
@@ -77,8 +77,8 @@ android {
             resValue("string", "EnableAdBanner", "true")
         }
         create("production") {
-            setDimension("type")
-//            buildConfigField("String", "FLAVOR_buildEnv", "prod")
+            dimension = "type"
+            //            buildConfigField("String", "FLAVOR_buildEnv", "prod")
 
             resValue ("string", "app_name", "Sudoku in the Universe")
 
