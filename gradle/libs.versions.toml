@@ -16,16 +16,16 @@ material3 = "1.2.0-alpha06"
 accompanist-pager = "0.28.0"
 accompanist-systemuicontroller = "0.30.0"
 navigation-compose = "2.7.1"
-acra = "5.11.0"
+acra = "5.11.3"
 ksp = "1.9.0-1.0.12"
 
 [libraries]
-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx"}
-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose"}
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 leakcanary-android = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanaryAndroid" }
-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime"}
-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle-runtime"}
+lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle-runtime" }
+lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle-runtime" }
 ui = { group = "androidx.compose.ui", name = "ui", version.ref = "compose" }
 ui-util = { group = "androidx.compose.ui", name = "ui-util", version.ref = "compose" }
 ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "compose" }

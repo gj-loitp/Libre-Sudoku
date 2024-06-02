@@ -15,8 +15,8 @@ android {
         applicationId = "com.roy93group.libresudoku"
         minSdk = 26
         targetSdk = 34
-        versionCode = 20240528
-        versionName = "2024.05.28"
+        versionCode = 20240602
+        versionName = "2024.06.02"
 
         vectorDrawables {
             useSupportLibrary = true
