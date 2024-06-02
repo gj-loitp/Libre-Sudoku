@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.roy93group.libresudoku"
+    namespace = "com.mckimquyen.libresudoku"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.roy93group.libresudoku"
+        applicationId = "com.mckimquyen.libresudoku"
         minSdk = 26
         targetSdk = 34
         versionCode = 20240602
