@@ -2,7 +2,7 @@
 agp = "8.2.0"
 kotlin = "1.9.0"
 leakcanaryAndroid = "2.10"
-room = "2.5.2"
+room = "2.6.1"
 aboutLibraries = '10.8.3'
 compose = '1.6.7'
 hilt = "2.46"
