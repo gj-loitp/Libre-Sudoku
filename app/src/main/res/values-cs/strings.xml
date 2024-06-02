@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="statistics_no_records">Zatím nemáte žádné záznamy</string>
     <string name="learn_basic_2">Nyní se podívejme na číslo 8. Číslo 8 ve 4. řádku 3. sloupce (R4C3) blokuje celý sloupec v našem rámečku. Číslo 8 tam tedy nemůže být</string>
     <string name="action_save">Uložit</string>
@@ -207,7 +207,7 @@
     <string name="create_folder">Vytvořit složku</string>
     <string name="delete_folder">Odstranit složku</string>
     <string name="folder_name">Složka: %1$s</string>
-    <plurals name="number_puzzles_to_import">
+    <plurals name="number_puzzles_to_import" tools:ignore="MissingQuantity">
         <item quantity="one">%1$d hádanka pro import</item>
         <item quantity="few">%1$d hádanky pro import</item>
         <item quantity="other">%1$d hádanek pro import</item>
@@ -222,7 +222,7 @@
     <string name="import_from_file_title">Ze souboru</string>
     <string name="import_saving">Ukládání</string>
     <string name="action_edit">Upravit</string>
-    <plurals name="puzzles_in_folder">
+    <plurals name="puzzles_in_folder" tools:ignore="MissingQuantity">
         <item quantity="one">%1$d hádanka</item>
         <item quantity="few">%1$d hádanky</item>
         <item quantity="other">%1$d hádanek</item>
@@ -241,7 +241,7 @@
 \n.sdm (nebo .txt se stejnou strukturou)
 \n.opensudoku
 \n.1gsudoku</string>
-    <plurals name="delete_selected_in_folder">
+    <plurals name="delete_selected_in_folder" tools:ignore="MissingQuantity">
         <item quantity="one">Jste si jistí, že chcete odstranit %1$d hru\?</item>
         <item quantity="few">Jste si jistí, že chcete odstranit %1$d hry\?</item>
         <item quantity="other">Jste si jistí, že chcete odstranit %1$d her\?</item>
