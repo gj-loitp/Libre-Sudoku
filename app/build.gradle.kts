@@ -15,15 +15,14 @@ android {
         applicationId = "com.mckimquyen.libresudoku"
         minSdk = 26
         targetSdk = 34
-        versionCode = 20240602
-        versionName = "2024.06.02"
+        versionCode = 20240722
+        versionName = "2024.07.22"
 
         vectorDrawables {
             useSupportLibrary = true
         }
 
         ksp {
-//            arg("room.schemaLocation", "${projectDir}/schemas")
             arg("room.schemaLocation", "$projectDir/schemas")
         }
     }
