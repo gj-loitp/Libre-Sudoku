@@ -23,7 +23,7 @@ import java.time.LocalDate
 //done
 
 @HiltAndroidApp
-class LibreSudokuApp : Application() {
+class RApp : Application() {
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
 
