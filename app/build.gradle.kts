@@ -1,12 +1,6 @@
 plugins {
-//    alias(libs.plugins.androidLibrary)
-//    alias(libs.plugins.kotlinAndroid)
-//    alias(libs.plugins.ksp)
-//    alias(libs.plugins.aboutLibraries)
-//    alias(libs.plugins.kapt)
-//    alias(libs.plugins.hilt)
-    id("com.android.application") version "8.2.2"
-//    id("com.android.library") version "8.2.2"
+//    id("com.android.application") version "8.2.2"
+    id("com.android.library") version "8.2.2"
     id("org.jetbrains.kotlin.android") version "1.9.0"
     id("com.google.devtools.ksp") version "1.9.0-1.0.12"
     id("com.mikepenz.aboutlibraries.plugin") version "10.8.3"
@@ -65,37 +59,6 @@ android {
         }
     }
     buildTypes.all { isCrunchPngs = false }
-
-//    flavorDimensions.add("type")
-//    productFlavors {
-//        create("dev") {
-//            dimension = "type"
-//            //            buildConfigField("String", "FLAVOR_buildEnv", "dev")
-//
-//            resValue ("string", "app_name", "Sudoku in the Universe DEV")
-//
-//            resValue("string", "SDK_KEY", "e75FnQfS9XTTqM1Kne69U7PW_MBgAnGQTFvtwVVui6kRPKs5L7ws9twr5IQWwVfzPKZ5pF2IfDa7lguMgGlCyt")
-//            resValue("string", "BANNER", "")
-//            resValue("string", "INTER", "")
-//
-//            resValue("string", "EnableAdInter", "true")
-//            resValue("string", "EnableAdBanner", "true")
-//        }
-//        create("production") {
-//            dimension = "type"
-//            //            buildConfigField("String", "FLAVOR_buildEnv", "prod")
-//
-//            resValue ("string", "app_name", "Sudoku in the Universe")
-//
-//            resValue("string", "SDK_KEY", "e75FnQfS9XTTqM1Kne69U7PW_MBgAnGQTFvtwVVui6kRPKs5L7ws9twr5IQWwVfzPKZ5pF2IfDa7lguMgGlCyt")
-//            resValue("string", "BANNER", "")
-//            resValue("string", "INTER", "")
-//
-//            resValue("string", "EnableAdInter", "true")
-//            resValue("string", "EnableAdBanner", "true")
-//        }
-//    }
-//    android.buildFeatures.dataBinding = true
 }
 
 aboutLibraries {
@@ -103,32 +66,6 @@ aboutLibraries {
 }
 
 dependencies {
-//    implementation(libs.core.ktx)
-//    implementation(libs.lifecycle.runtime.ktx)
-//    implementation(libs.lifecycle.runtime.compose)
-//    implementation(libs.activity.compose)
-//    implementation(libs.ui)
-//    implementation(libs.ui.util)
-//    implementation(libs.ui.graphics)
-//    implementation(libs.ui.tooling.preview)
-//    implementation(libs.material3)
-//    implementation(libs.material.icons.extended)
-//    debugImplementation(libs.ui.tooling)
-//    debugImplementation(libs.ui.test.manifest)
-//    implementation(libs.navigation.compose)
-//    implementation(libs.accompanist.systemuicontroller)
-//    implementation(libs.accompanist.pager.indicators)
-//    implementation(libs.hilt)
-//    implementation(libs.hilt.navigation)
-//    kapt(libs.hilt.compiler)
-//    implementation(libs.room.runtime)
-//    implementation(libs.room.ktx)
-//    ksp(libs.room.compiler)
-//    implementation(libs.datastore.preferences)
-//    implementation(libs.appcompat)
-//    implementation(libs.acra.dialog)
-//    implementation(libs.acra.mail)
-//    implementation(libs.aboutLibraries)
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.3")
