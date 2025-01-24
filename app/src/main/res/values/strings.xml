@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">Sudoku</string>
     <string name="nav_bar_statistics">Statistics</string>
     <string name="nav_bar_home">Home</string>
     <string name="nav_bar_more">More</string>
