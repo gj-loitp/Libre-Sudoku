@@ -9,14 +9,15 @@ plugins {
 
 android {
     namespace = "com.mckimquyen.libresudoku"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.mckimquyen.libresudoku"
         minSdk = 26
-        targetSdk = 34
-        versionCode = 20240722
-        versionName = "2024.07.22"
+        //noinspection EditedTargetSdkVersion
+        targetSdk = 35
+        versionCode = 20250124
+        versionName = "2025.01.25"
 
         vectorDrawables {
             useSupportLibrary = true
